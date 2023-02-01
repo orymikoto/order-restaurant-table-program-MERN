@@ -33,4 +33,3 @@ mongoose.set('strictQuery', false)
 mongoose.connect(db_conn, { useNewUrlParser: true, useUnifiedTopology: true})
 .then(() => app.listen(port, () => console.log(`Server running on port: ${port}`)))
 .catch((error) => console.log(error.message))
-
