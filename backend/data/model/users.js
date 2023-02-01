@@ -12,6 +12,7 @@ const user_schema = mongoose.Schema({
     data: Buffer,
     contentType: String
   },
+  user_active: Boolean,
   resetToken: String,
   expireToken: Date
 })

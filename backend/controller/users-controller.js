@@ -1,5 +1,9 @@
 // Import NPM package
+import jwt from "jsonwebtoken"
+import bcrypt from 'bcryptjs'
+import dotenv from 'dotenv'
 
+dotenv.config()
 // Import local package
 import user_model from '../data/model/users.js'
 
@@ -34,7 +38,7 @@ export const register = async (req, res) => {
     if(password !== confirm_password) return res.status(400).json({ message: "password don't match" })
 
     const hashedPassword = await bcrypt.hash(password, 12)
-    const result = await user_model.create({ email, password: hashedPassword, name: name})
+    const result = await user_model.create({ email, password: hashedPassword, name: name, address: address})
     const token = jwt.sign({ email: result.email, id: result._id }, SECRET, { expiresIn: "3h" })
 
     res.status(200).json({ email: result.email, name: result.name, message: 'users sucessfully created', token})
@@ -45,8 +49,40 @@ export const register = async (req, res) => {
 }
 
 // Update user password punction
-
+export const password_update = async (req, res) => {
+  const {new_password, confirm_new_password} = req.body
+  const sentToken = req.body.token
+  try {
+    if(confirm_new_password != new_password){
+      
+    }
+    check_token = await user_model.findOne({resetToken: sentToken, expireToken:{$gt: Date.now()}})
+    if(!check_token){
+      return res.status(422).json({error: "Try again session expired"})
+    }
+    encrypt_password = await bcrypt.hash(new_password, 12)
+    await user_model.updateOne({resetToken: sentToken, expireToken:{$gt: Date.now()}}, {
+      update: {
+        password: encrypt_password,
+        resetToken: undefined,
+        expireToken: undefined
+      }
+    })
+    
+    return res.status(200).json({message: "password updated success"})
+  } catch (error) {
+    return res.status(500).json({message: "something went wrong"})
+  }
+}
 
 // Update user profile function
+// export const update_profile = async (req, res) => {
+//   const {email, address,}
+//   try {
+    
+//   } catch (error) {
+    
+//   }
+// }
 
 // Deactivate user profile function
