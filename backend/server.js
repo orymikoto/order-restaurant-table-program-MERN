@@ -1,7 +1,11 @@
+// Import NPM package
 import express from 'express'
 import cors from 'cors'
 import mongoose from 'mongoose'
 import dotenv from 'dotenv'
+
+// Import local package
+import users_routes from './routes/users-routes.js'
 
 //Port set
 dotenv.config()
@@ -20,7 +24,7 @@ app.use(express.urlencoded({extended: true}))
 app.get('/', (req, res) => {
   res.send("Wellcome to rent-restaurant-table")
 })
-// app.use('/api/users', /*to do*/ )
+app.use('/api/users',  users_routes)
 // app.use('/api/rent-table', /*to do*/ )
 // app.use('/api/table-list', /*to do*/ )
 
