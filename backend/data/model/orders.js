@@ -6,8 +6,8 @@ const user_schema = mongoose.Schema({
   email: {type: String, require: true, unique: true},
   password: {type: String, required: true},
   resetToken: String,
-  expireToken: Date
-})
+  expireToken: Date,
+}, {collection: 'orders', timestamps: true})
 
 const User = mongoose.model('User' , user_schema)
 

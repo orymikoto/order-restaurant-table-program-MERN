@@ -24,12 +24,13 @@ app.use(express.urlencoded({extended: true}))
 app.get('/', (req, res) => {
   res.send("Wellcome to rent-restaurant-table")
 })
-app.use('/api/users',  users_routes)
+app.use('/api/users/',  users_routes)
 // app.use('/api/rent-table', /*to do*/ )
 // app.use('/api/table-list', /*to do*/ )
 
 // Connecting Mongoose and run server on given port
 mongoose.set('strictQuery', false)
+
 mongoose.connect(db_conn, { useNewUrlParser: true, useUnifiedTopology: true})
 .then(() => app.listen(port, () => console.log(`Server running on port: ${port}`)))
 .catch((error) => console.log(error.message))
