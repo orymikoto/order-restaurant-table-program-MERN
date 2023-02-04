@@ -7,15 +7,22 @@ import fs from "fs"
 dotenv.config()
 // Import local package
 import user_model from '../data/model/users.js'
-import formidable from "formidable"
-import path from "path"
+
+// Get all Users
+export const get_all_users = async (req, res) => {
+  try {
+    const users = await user_model.find({})
+    return res.status(200).json({message: 'All users data retrieved', data: users})
+  } catch (error) {
+    res.status(500).json({ message: "Something went wrong", error: error})
+  }
+} 
 
 // Sign-in / Login function
 export const login = async (req, res) => {
   const { email, password } = req.body
   try {
     const existing_user = await user_model.findOne({ email: email })
-
     if(!existing_user){
       return res.status(404).json({message: "User doesn't exist"})
     }
@@ -34,7 +41,6 @@ export const login = async (req, res) => {
 // Sign-up / Register function
 export const register = async (req, res) => {
   const { name, email, password, confirm_password, address} = req.body
-  console.log("masuk");
   try {
     const existing_user = await user_model.findOne({ email: email})
 
@@ -47,6 +53,24 @@ export const register = async (req, res) => {
 
     res.status(200).json({ email: result.email, name: result.name, message: 'users sucessfully created', token})
 
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "Something went wrong", error: error })
+  }
+}
+
+// Get user profile
+
+export const get_user_profile = async (req, res) => {
+  try {
+    const token = jwt.decode(req.headers['authorization'].split(" ")[1])
+    const user_profile = await user_model.findById(token.id, {
+      password: 0,
+    })
+    if (!user_model) {
+      return res.status(404).json({message: "Your data not found try to re-login!"})
+    }
+    return res.status(200).json({message: 'get user profile is success!', data: user_profile})
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: "Something went wrong", error: error })
@@ -102,3 +126,16 @@ export const upload_picture = async (req, res) => {
 }
 
 // Deactivate user profile function
+export const deactivate_user = async (req, res) => {
+  try {
+    const token = jwt.decode(req.headers['authorization'].split(" ")[1])
+    const target_user = await user_model.updateOne({_id: token.id}, {
+      user_active: false
+    })
+
+    return res.status(200).json({message: 'User account deactivate', user_email: token.email})
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({message: 'something went wrong', error: error})
+  }
+}

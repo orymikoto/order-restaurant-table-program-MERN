@@ -9,13 +9,13 @@ import upload from '../middleware/picture-upload.js' // Middleware for retrieve 
 
 const router = express.Router()
 
-router.get('/', /* to do */)
-router.get('/profile', /* to do */)
+router.get('/', controller.get_all_users)
+router.get('/profile', auth, controller.get_user_profile )
 router.post('/register', controller.register)
 router.post('/login', controller.login)
 router.patch('/update-profile', auth, controller.update_profile)
 router.patch('/change-password', auth, controller.password_update)
 router.patch('/update-picture', auth, upload.single('image'), controller.upload_picture)
-router.delete('/', /*to do */)
+router.delete('/', auth, controller.deactivate_user /*to do */)
 
 export default router
