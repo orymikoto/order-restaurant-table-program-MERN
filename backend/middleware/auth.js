@@ -3,7 +3,7 @@ import dotenv from 'dotenv'
 
 dotenv.config()
 
-export const authentication = async (req, res, next) => {
+const authentication = async (req, res, next) => {
   const authHeader = req.headers['authorization']
   // console.log(authHeader);
   const token = authHeader && authHeader.split(' ')[1]
@@ -21,3 +21,5 @@ export const authentication = async (req, res, next) => {
     next()
   })
 }
+
+export default authentication

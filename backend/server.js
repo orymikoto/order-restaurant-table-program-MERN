@@ -3,6 +3,8 @@ import express from 'express'
 import cors from 'cors'
 import mongoose from 'mongoose'
 import dotenv from 'dotenv'
+import multer from 'multer'
+import bodyParser from 'body-parser'
 
 // Import local package
 import users_routes from './routes/users-routes.js'
@@ -14,11 +16,15 @@ const port = process.env.PORT
 //Connection String
 const db_conn = process.env.DB_CONN
 
+//Multer to retreive formdata
+// const upload = multer()
+
 //Express and Cors
 const app = express()
-app.use(cors())
-app.use(express.json())
+// app.use(cors())
 app.use(express.urlencoded({extended: true}))
+app.use(express.json())
+// app.use(upload.array()) // for parsing form data
 // app.use(express.)
 
 //Routes

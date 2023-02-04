@@ -8,6 +8,7 @@ dotenv.config()
 // Import local package
 import user_model from '../data/model/users.js'
 import formidable from "formidable"
+import path from "path"
 
 // Sign-in / Login function
 export const login = async (req, res) => {
@@ -26,7 +27,7 @@ export const login = async (req, res) => {
     const token = jwt.sign({ email: existing_user.email, id: existing_user._id}, process.env.SECRET, { expiresIn: "3h"})
     res.status(200).json({ email: existing_user.email, name: existing_user.name, token})
   } catch (error) {
-    res.status(500).json({ message: "Something went wrong"})
+    res.status(500).json({ message: "Something went wrong", error: error})
   }
 }
 
@@ -48,7 +49,7 @@ export const register = async (req, res) => {
 
   } catch (error) {
     console.log(error);
-    res.status(500).json({ message: "Something went wrong" })
+    res.status(500).json({ message: "Something went wrong", error: error })
   }
 }
 
@@ -81,27 +82,22 @@ export const update_profile = async (req, res) => {
     })
     return res.status(200).json({ message: 'user successfully updated', result: {name: name, address: address}})
   } catch (error) {
-    return res.status(500).json({message: 'something went wrong'})
+    return res.status(500).json({message: 'something went wrong', error: error})
   }
 }
 
 export const upload_picture = async (req, res) => {
-  const filepath = `./frontend/public/`
-  const form = new formidable.IncomingForm()
-  form.uploadDir = filepath
-  console.log(form);
-  // return res.json({email: email, address: address})
   try {
-    form.parse.req, async (err, fields, files) => {
-      if (err) res.send("Error parsing the files")
-      const file = files.upload
-      const fileName = file.originalFilename
-      fs.renameSync(file.filepath, path.join(filepath, fileName))
-      res.redirect("/")
-    } 
-    
+    await user_model.updateOne({email: req.body.email}, {
+      profile_picture: {
+        data: fs.readFileSync(('./frontend/public/images/' + req.file.filename)),
+        contentType: req.file.mimeType
+      }
+    })
+    return res.status(200).json({message: 'successfully update image', name: req.file.filename, email: req.body.email})
   } catch (error) {
-    
+    console.log(error);
+    return res.status(500).json({message: 'something went wrong', error: error})
   }
 }
 

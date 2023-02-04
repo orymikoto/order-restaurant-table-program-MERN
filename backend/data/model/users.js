@@ -11,6 +11,7 @@ const user_schema = mongoose.Schema({
   profile_picture: { // to store string of uri image
     data: Buffer,
     contentType: String
+    // default: './frontend/public/images/default-pp.png'
   },
   user_active: { type: Boolean, default: true},
   // resetToken: String,
