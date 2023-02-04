@@ -73,19 +73,33 @@ export const password_update = async (req, res) => {
 
 // Update user profile function
 export const update_profile = async (req, res) => {
-  const {email, address} = req.body
-  // const file = req.files.upload
-  const filepath = `./frontend/public/${file.name}`
-  const form = new formidable.IncomingForm()
+  const {email, address, name, } = req.body
   try {
-    form.uploadDir = filepath
-    form.parse(req, async (err, fields, files) => {
+    user_update = await user_model.findOneAndUpdate({email: email}, {
+      address: address,
+      name: name
+    })
+    return res.status(200).json({ message: 'user successfully updated', result: {name: name, address: address}})
+  } catch (error) {
+    return res.status(500).json({message: 'something went wrong'})
+  }
+}
+
+export const upload_picture = async (req, res) => {
+  const filepath = `./frontend/public/`
+  const form = new formidable.IncomingForm()
+  form.uploadDir = filepath
+  console.log(form);
+  // return res.json({email: email, address: address})
+  try {
+    form.parse.req, async (err, fields, files) => {
       if (err) res.send("Error parsing the files")
       const file = files.upload
       const fileName = file.originalFilename
       fs.renameSync(file.filepath, path.join(filepath, fileName))
       res.redirect("/")
-    })
+    } 
+    
   } catch (error) {
     
   }
