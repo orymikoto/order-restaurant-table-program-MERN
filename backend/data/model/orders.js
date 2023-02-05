@@ -1,14 +1,15 @@
 // Import NPM package
 import mongoose from "mongoose";
 
-const user_schema = mongoose.Schema({
-  name: {type: String, require: true},
-  email: {type: String, require: true, unique: true},
-  password: {type: String, required: true},
-  resetToken: String,
-  expireToken: Date,
+const order_schema = mongoose.Schema({
+  table_id: {type: mongoose.Schema.Types.ObjectId, ref: 'table_schema', required: true},
+  rent_time: {type: Object, default: {
+    start: {type: Date},
+    end: {type: Date}
+  }, required: true},
+  customer_phone_number: {type: String, required: true},
+  customer_name: {type: String, default: 'anonym'},
+  bills_paid: {type: Boolean, default: 'false'},
 }, {collection: 'orders', timestamps: true})
 
-const User = mongoose.model('User' , user_schema)
-
-export default User
+export default mongoose.model('order_schema' , order_schema)

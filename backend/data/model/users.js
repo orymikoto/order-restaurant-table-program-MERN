@@ -3,8 +3,8 @@ import mongoose from "mongoose";
 
 // user schema
 const user_schema = mongoose.Schema({
-  name: {type: String, require: true},
-  email: {type: String, require: true, unique: true},
+  name: {type: String, required: true},
+  email: {type: String, required: true, unique: true},
   password: {type: String, required: true},
   address: {type: String},
   table_ordered: {type: [mongoose.Schema.Types.ObjectId], ref:'order_schema'},
