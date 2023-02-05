@@ -13,6 +13,15 @@ export const get_all_tables = async (req, res) => {
     }
 }
 
+export const get_exist_table = async (req, res) => {
+  try {
+    const all_tables = await table_schema.find({still_exist: true})
+    return res.status(200).json({message: 'All tables retrieved.', data: all_tables})
+  } catch (error) {
+    return res.status(500).json({message: 'something went wrong.', error: error})
+  }
+}
+
 // Create new tables instance
 export const create_table = async (req, res) => {
   try {
@@ -38,26 +47,27 @@ export const create_table = async (req, res) => {
 export const update_table = async (req, res) => {
   try {
     const { table_id, chairs_amount, room_location, table_model} = req.body
-
+    // console.log(typeof(table_id));
     // Check empty field
     if (!table_id || !chairs_amount || !room_location || !table_model){ 
       return res.status(400).json({message: 'Request not complete'})
     }
 
     //check is table exist
-    const check_table = await table_schema.findById({table_id})
+    const check_table = await table_schema.findById(table_id)
     if (!check_table){
       return res.status(404).json({message: `Table with id ${table_id} not exist.`})
     }
 
-    const updated_table = await table_schema.findByIdAndUpdate({table_id}, {
+    const updated_table = await table_schema.findByIdAndUpdate(table_id, {
       chairs_amount: chairs_amount,
       room_location: room_location,
-      table_model: table_model
-    })
+      table_model: table_model,
+    }, {new: true})
 
     return res.status(200).json({message: 'Table updated', data: updated_table})
   } catch (error) {
+    console.log(error);
     return res.status(500).json({message: 'something went wrong.', error: error})
   }
 }
@@ -73,12 +83,12 @@ export const soft_delete_table = async (req, res) => {
     }
 
     //check is table exist
-    const check_table = await table_schema.findById({table_id})
+    const check_table = await table_schema.findById(table_id)
     if (!check_table){
       return res.status(404).json({message: `Table with id ${table_id} not exist.`})
     }
 
-    const soft_deleted_table = await table_schema.findByIdAndUpdate({table_id}, {
+    const soft_deleted_table = await table_schema.findByIdAndUpdate(table_id, {
       still_exist: false
     })
 

@@ -7,9 +7,10 @@ import auth from '../middleware/auth.js'
 
 const router = express.Router()
 
-router.get('/all_tables', auth, controller.get_all_tables)
-router.post('/', /*to do */)
-router.patch('/', /*to do */)
-router.delete('/', /*to do */)
+router.get('/', auth, controller.get_exist_table)
+router.get('/all-tables', auth, controller.get_all_tables)
+router.post('/create', auth, controller.create_table)
+router.patch('/update', auth, controller.update_table)
+router.delete('/', auth, controller.soft_delete_table)
 
 export default router

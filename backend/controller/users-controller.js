@@ -8,6 +8,16 @@ dotenv.config()
 // Import local package
 import user_model from '../data/model/users.js'
 
+// Get all active users
+export const get_active_users = async (req, res) => {
+  try {
+    const users = await user_model.find({user_active: true})
+    return res.status(200).json({message: 'All users data retrieved', data: users})
+  } catch (error) {
+    res.status(500).json({ message: "Something went wrong", error: error})
+  }
+}
+
 // Get all Users
 export const get_all_users = async (req, res) => {
   try {
@@ -133,7 +143,7 @@ export const deactivate_user = async (req, res) => {
       user_active: false
     })
 
-    return res.status(200).json({message: 'User account deactivate', user_email: token.email})
+    return res.status(200).json({message: 'User account deactivate', user_email: target_user.email})
   } catch (error) {
     console.log(error);
     return res.status(500).json({message: 'something went wrong', error: error})
