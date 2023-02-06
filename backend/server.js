@@ -9,6 +9,7 @@ import bodyParser from 'body-parser'
 // Import local package
 import users_routes from './routes/users-routes.js'
 import tables_routes from './routes/tables-routes.js'
+import orders_routes from './routes/orders-routes.js'
 
 //Port set
 dotenv.config()
@@ -31,8 +32,8 @@ app.get('/', (req, res) => {
   res.send("Wellcome to rent-restaurant-table")
 })
 app.use('/api/users/',  users_routes)
-app.use('/api/tables/', tables_routes )
-// app.use('/api/rent-table', /*to do*/ )
+app.use('/api/tables/', tables_routes)
+app.use('/api/order-table/', orders_routes)
 
 // Connecting Mongoose and run server on given port
 mongoose.set('strictQuery', false)

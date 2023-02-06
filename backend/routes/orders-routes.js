@@ -7,8 +7,8 @@ import * as controller from '../controller/orders-controller.js'
 const router = express.Router()
 
 // Router Admin
-router.get('/', /*to do */)
-router.post('/', /*to do */)
+router.get('/', controller.get_all_future_table_orders)
+router.post('/admin', controller.create_admin_table_order)
 router.patch('/', /*to do */)
 router.delete('/', /*to do */)
 
