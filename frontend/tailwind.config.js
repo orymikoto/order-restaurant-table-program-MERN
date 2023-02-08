@@ -5,6 +5,10 @@ module.exports = {
   ],
   theme: {
     extend: {},
+    fontFamily: {
+      'unbounded': ['Unbounded', 'sans-serif'],
+      'mrdafoe': ['Mr Dafoe', 'serif']
+    }
   },
-  plugins: [],
+  plugins:[],
 }
