@@ -2,14 +2,14 @@
 import React from 'react'
 
 // Local Components Package
-import navbar from '../components/navbar'
+import Navbar from '../components/Navbar'
 
-function home() {
+function Home() {
   return (
-    <>
-      <navbar />
-    </>
+    <div>
+      <Navbar />
+    </div>
   )
 }
 
-export default home
+export default Home

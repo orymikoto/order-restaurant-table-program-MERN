@@ -1,18 +1,17 @@
 // NPM package
-import { BrowserRouter, Route } from 'react-router-dom'
+import React from 'react';
+import { Route, Routes } from 'react-router-dom'
 
 // Import local pages
-import home from './pages/home';
-
-import './App.css';
+import Home from './pages/Home';
 
 function App() {
   return (
-   <BrowserRouter>
+   <div className='App'>
     <Routes>
-      <Route path='/' element={home}/>
+      <Route path='/' element={<Home />}/>
     </Routes>
-   </BrowserRouter>
+   </div>
   );
 }
 
