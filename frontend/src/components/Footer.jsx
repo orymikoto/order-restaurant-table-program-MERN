@@ -23,7 +23,7 @@ function Footer() {
               <h3 className='font-mrdafoe'>Developer</h3>
             </div>
             <div className='my-2 text-[0.75rem] font-medium'>
-              <p>&#169;ORYMIKOTO</p>
+              <p>&#169;2023 ORYMIKOTO</p>
             </div>
           </div>
       </div>

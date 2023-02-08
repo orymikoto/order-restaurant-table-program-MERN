@@ -3,7 +3,7 @@ import React from 'react'
 
 function Navbar() {
   return (
-    <div className=' flex bg-neutral-800 w-full py-3'>
+    <div className='flex bg-neutral-800 w-full py-3 rounded-b-[7rem]'>
       
       <div className=' flex-1 flex ml-20 items-center' /* Restaurant Name */> 
         <h2 className=' cursor-default font-semibold text-2xl text-neutral-100 '>
