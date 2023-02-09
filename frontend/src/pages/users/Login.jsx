@@ -3,6 +3,7 @@ import InputText from '../../components/InputText'
 import axios from 'axios'
 import { Cookies } from 'react-cookie'
 import moment from 'moment'
+import {Link} from 'react-router-dom'
 
 import {AiFillGoogleCircle} from 'react-icons/ai'
 import {FaFacebook, FaTelegram} from 'react-icons/fa'
@@ -26,7 +27,7 @@ function Login() {
 
   const onSubmited = (e) => {
     e.preventDefault()
-    axios.post('http://localhost:8000/api/users/login', input).then((res) => {
+    axios.post( process.env.REACT_APP_SERVER_URL + '/users/login', input).then((res) => {
       console.log(res)
       cookies.set('auth-token', res.data.token, { path: '/', expires: exp_time})
       setMessage(res.data.message)
@@ -60,7 +61,9 @@ function Login() {
         </div>
         <div className=' flex-1 items-center justify-end my-2 mb-4 flex flex-col'>
           <h4 className='text-center text-neutral-400 text-sm font-normal'>You dont have any account?</h4>
-          <h4 className='text-center text-neutral-400 p-0 hover:text-teal-600 cursor-pointer duration-200 ease-in text-sm font-semibold'>Click Here</h4>
+          <Link to='/register'>
+            <h4 className='text-center text-neutral-400 p-0 hover:text-teal-600 cursor-pointer duration-200 ease-in text-sm font-semibold'>Click Here</h4>
+          </Link>
         </div>
       </div>
       <div style={{ backgroundImage: 'url("/assets/restlogin.jpg")'}} className='bg-cover flex w-[70%] h-[80vh]'>
