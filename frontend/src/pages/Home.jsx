@@ -1,11 +1,13 @@
 // NPM Package
 import React from 'react'
 import Footer from '../components/Footer'
+import LeftSliderRightDesc from '../components/LeftSliderRightDesc'
 
 // Local Components Package
 import Navbar from '../components/Navbar'
 
 // Images
+// title="Decide your best tables" description="There are so many tables and place to explore in MIKOTO RESTAURANT, and you will find there are so many option that will fulfil your lunch and dinner best place. In MIKOTO RESTAURANT We also make sure the air feels great and clean to maximize the taste of your dish. MIKOTO RESTAURANT Table is very well designed by our own carpenter to make your eating experience feel more comfortable, and you shall not feel anything in particular except your food taste."
 
 function Home() {
   return (
@@ -50,6 +52,21 @@ function Home() {
             <div className=' text-justify m-7'>
               <p className='text-neutral-600 text-center text-lg font-semibold'>Description:</p>
               <p className='text-neutral-600 font-medium'>Very delicious menu cooked by masterclass chef. The Dishes is cooked in perfect temperature and using the best resource available in order to bring new tasted experience to the our lovely Customer</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className='flex my-7 flex-col w-[90%] m-auto'>
+        <div className='flex gap-x-7'>
+          <div className='relative rounded-3xl overflow-hidden min-w-[35%]'>
+            <LeftSliderRightDesc  />
+          </div>
+          <div className='flex flex-col'>
+            <div className='text-3xl mb-4 font-bold text-neutral-800'>
+              <h3>Decide your best tables!</h3> 
+            </div>
+            <div className='text-md text-justify font-normal text-neutral-600'>
+              <p>There are so many tables and place to explore in MIKOTO RESTAURANT, and you will find there are so many option that will fulfil your lunch and dinner best place. In MIKOTO RESTAURANT We also make sure the air feels great and clean to maximize the taste of your dish. MIKOTO RESTAURANT Table is very well designed by our own carpenter to make your eating experience feel more comfortable, and you shall not feel anything in particular except your food taste.</p> 
             </div>
           </div>
         </div>
