@@ -1,5 +1,6 @@
 /* eslint-disable react/jsx-no-comment-textnodes */
 import React from 'react'
+import {Link} from 'react-router-dom'
 
 function Navbar() {
   return (
@@ -18,8 +19,12 @@ function Navbar() {
       </div>
 
       <div className='flex mr-20' /* Login / Register / Profile Function */>
-        <div className=' cursor-pointer text-lg flex mx-2 my-auto  rounded-full w-[6rem] h-[2.1rem] justify-center text-center font-medium text-white items-center ease-in-out duration-300 hover:bg-white hover:text-teal-600 bg-teal-600 '>Login</div>
-        <div className=' cursor-pointer text-lg flex mx-2 my-auto  rounded-full w-[6rem] h-[2.1rem] justify-center text-center font-medium text-white items-center ease-in-out duration-300 hover:bg-white hover:text-yellow-500 bg-yellow-500 '>Register</div>
+        <Link className='flex items-center justify-center' to={'/login'}>
+          <div className=' cursor-pointer text-lg flex mx-2 my-auto  rounded-full w-[6rem] h-[2.1rem] justify-center text-center font-medium text-white items-center ease-in-out duration-300 hover:bg-white hover:text-teal-600 bg-teal-600 '>Login</div>
+        </Link>
+        <Link className='flex items-center justify-center' to={'/register'}>
+          <div className=' cursor-pointer text-lg flex mx-2 my-auto  rounded-full w-[6rem] h-[2.1rem] justify-center text-center font-medium text-white items-center ease-in-out duration-300 hover:bg-white hover:text-yellow-500 bg-yellow-500 '>Register</div>
+        </Link>
       </div>
     </div>
   )

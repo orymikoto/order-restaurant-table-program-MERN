@@ -9,17 +9,18 @@ import 'swiper/css/autoplay'
 
 // SwiperCore.use([Navigation])
 
-function LeftSliderRightDesc() {
+function ImageSwiperSlider({images}) {
   return (
         <Swiper autoplay={{delay:3000}} className='w-full h-[15rem]' modules={[Navigation, Autoplay, A11y]} loop={true} navigation >
-          <SwiperSlide className='text-center bg-slate-400'>
-            <img src="/assets/restaurant1.jpg" className='w-full' alt="mikotopic" />
-          </SwiperSlide>
-          <SwiperSlide className='text-center w-full bg-slate-400'>
-            <img src='/assets/restaurant2.jpg' className='w-full' alt='mikoto2pic'/>
-          </SwiperSlide>
+          {
+            images.map((i) => 
+              <SwiperSlide className='text-center'>
+                <img src={i} className='w-full' alt="mikotopic" />
+              </SwiperSlide>
+            )
+          }
         </Swiper>
   )
 }
 
-export default LeftSliderRightDesc
+export default ImageSwiperSlider
