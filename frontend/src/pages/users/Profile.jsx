@@ -3,13 +3,30 @@ import { useCookies } from 'react-cookie'
 import {FaArrowLeft} from 'react-icons/fa'
 import {FiLogOut} from 'react-icons/fi'
 import jwt_decode from 'jwt-decode'
+import axios from 'axios'
 
 import InformationBox from '../../components/InformationBox'
 import { Link } from 'react-router-dom'
+import EditInformationBox from '../../components/EditInformationBox'
 
 function Profile() {
   const [Userinfo, setUserinfo] = useState({})
+  const [Editmode, setEditmode] = useState(false)
   const [cookies] = useCookies()
+
+  const handleChange = (e) => {
+    setUserinfo((prevState) => {
+      return {...prevState, ...{ [e.target.name] : e.target.value}}
+    })
+  }
+
+  const onSubmited = (e) => {
+    e.preventDefault()
+    axios.patch( process.env.REACT_APP_SERVER_URL + '/users/login', Userinfo, { headers: {"Authorization": `Bearer ${cookies.auth_token}`}}).then((res) => {
+      console.log(res)
+    }).catch((err) => 
+    console.log(err))
+  }
 
   useEffect(() => {
     setUserinfo(jwt_decode(cookies.auth_token))
@@ -27,14 +44,14 @@ function Profile() {
           </div>
         </div>
         <div className='flex flex-col gap-2 gap-y-4 h-full'>
-          <div className='font-medium text-white text-md lg:mx-7 md:mx-4 py-1 text-center font-poppins rounded-lg border-r-2 border-b-2 bg-teal-400'>
+          <div className='font-medium text-white text-md lg:mx-5 md:mx-3 py-1 text-center font-poppins rounded-lg border-r-2 border-b-2 bg-teal-400'>
             <p>Profile</p>
           </div>
-          <div className='font-medium text-black text-md lg:mx-7 md:mx-4 hover:border-teal-400 duration-300 py-1 text-center font-poppins border-r-2 border-b-2 rounded-lg '>
+          <div className='font-medium text-black text-md lg:mx-5 md:mx-3 hover:border-teal-400 duration-300 py-1 text-center font-poppins border-r-2 border-b-2 rounded-lg '>
             <p>Table Order</p>
           </div>
-          <div className='font-medium text-black text-md lg:mx-7 md:mx-4 hover:border-teal-400 duration-300 py-1 text-center font-poppins border-r-2 border-b-2 rounded-lg '>
-            <p>Profile</p>
+          <div className='font-medium text-black text-md lg:mx-5 md:mx-3 hover:border-teal-400 duration-300 py-1 text-center font-poppins border-r-2 border-b-2 rounded-lg '>
+            <p>Change Password</p>
           </div>
           <div className='flex flex-1 mx-auto flex-self-end items-end '>
             <div className='flex cursor-pointer items-center text-neutral-400 duration-300 ease-in-out hover:text-red-600 gap-x-2 mb-7'>
@@ -74,7 +91,12 @@ function Profile() {
           <div className='m-4 text-neutral-900 font-medium font-poppins text-xl'>
             <h3>Profile Information</h3>
           </div>
-          <InformationBox information={[{title: 'Name', value: Userinfo.name}, {title: 'Email', value: Userinfo.email}, {title: 'Country', value: Userinfo.country}, {title: 'City', value: Userinfo.city}, {title: 'Phone Number', value: Userinfo.phone_number}]} />
+          {
+            Editmode?
+            <EditInformationBox submit={onSubmited} information={[{title: 'Name', name:'name', value: Userinfo.name}, {title: 'Email', name: 'email', value: Userinfo.email}, {title: 'Country', name: 'country', value: Userinfo.country}, {title: 'City', name: 'city', value: Userinfo.city}, {title: 'Phone Number', name: 'phone_number', value: Userinfo.phone_number}]} onChange={handleChange} changemode={setEditmode} />
+            :
+            <InformationBox information={[{title: 'Name', value: Userinfo.name}, {title: 'Email', value: Userinfo.email}, {title: 'Country', value: Userinfo.country}, {title: 'City', value: Userinfo.city}, {title: 'Phone Number', value: Userinfo.phone_number}]}  changemode={setEditmode} />
+          }
         </div>
       </div>
     </div>
