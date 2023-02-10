@@ -7,7 +7,8 @@ module.exports = {
     extend: {},
     fontFamily: {
       'unbounded': ['Unbounded', 'sans-serif'],
-      'mrdafoe': ['Mr Dafoe', 'serif']
+      'mrdafoe': ['Mr Dafoe', 'serif'],
+      'poppins': ['Poppins', 'sans-serif']
     }
   },
   plugins:[],
