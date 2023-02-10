@@ -29,7 +29,7 @@ function Login() {
     e.preventDefault()
     axios.post( process.env.REACT_APP_SERVER_URL + '/users/login', input).then((res) => {
       console.log(res)
-      cookies.set('auth-token', res.data.token, { path: '/', expires: exp_time})
+      cookies.set('auth_token', res.data.token, { path: '/', expires: exp_time})
       setMessage(res.data.message)
     }).catch((err) => 
     console.log(err))

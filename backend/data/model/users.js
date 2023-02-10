@@ -6,7 +6,9 @@ const user_schema = mongoose.Schema({
   name: {type: String, required: true},
   email: {type: String, required: true, unique: true},
   password: {type: String, required: true},
-  address: {type: String},
+  country: {type: String},
+  city: {type: String},
+  phone_number: {type: String, default: 'Not Defined'},
   table_ordered: {type: [mongoose.Schema.Types.ObjectId], ref:'order_schema'},
   profile_picture: { // to store string of uri image
     data: Buffer,

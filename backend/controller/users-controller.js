@@ -41,7 +41,7 @@ export const login = async (req, res) => {
       return res.status(400).json({message: "Invalid credentials"})
     }
 
-    const token = jwt.sign({ email: existing_user.email, id: existing_user._id}, process.env.SECRET, { expiresIn: "3h"})
+    const token = jwt.sign({ email: existing_user.email, name: existing_user.name, country: existing_user.country, city: existing_user.city, phone_number: existing_user.phone_number}, process.env.SECRET, { expiresIn: "3h"})
     res.status(200).json({ email: existing_user.email, name: existing_user.name, token})
   } catch (error) {
     res.status(500).json({ message: "Something went wrong", error: error})
@@ -50,7 +50,7 @@ export const login = async (req, res) => {
 
 // Sign-up / Register function
 export const register = async (req, res) => {
-  const { name, email, password, confirm_password, address} = req.body
+  const { name, email, password, confirm_password, country, city, phone_number } = req.body
   try {
     const existing_user = await user_model.findOne({ email: email})
 
@@ -58,8 +58,8 @@ export const register = async (req, res) => {
     if(password !== confirm_password) return res.status(400).json({ message: "password don't match" })
 
     const hashedPassword = await bcrypt.hash(password, 12)
-    const result = await user_model.create({ email, password: hashedPassword, name: name, address: address})
-    const token = jwt.sign({ email: result.email, id: result._id }, process.env.SECRET , { expiresIn: "3h" })
+    const result = await user_model.create({ email, password: hashedPassword, name: name, country: country, city: city, phone_number: phone_number })
+    const token = jwt.sign({ email: result.email, name: result.name, country: result.country, city: result.city, phone_number: result.phone_number}, process.env.SECRET, { expiresIn: "3h"})
 
     res.status(200).json({ email: result.email, name: result.name, message: 'users sucessfully created', token})
 

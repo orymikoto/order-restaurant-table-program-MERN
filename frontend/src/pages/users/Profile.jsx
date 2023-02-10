@@ -1,15 +1,27 @@
-import React from 'react'
-import DataShow from '../../components/DataShow'
-import {FaEdit, FaBell} from 'react-icons/fa'
+import React, { useEffect, useState } from 'react'
+import { useCookies } from 'react-cookie'
+import {FaArrowLeft} from 'react-icons/fa'
 import {FiLogOut} from 'react-icons/fi'
+import jwt_decode from 'jwt-decode'
+
+import InformationBox from '../../components/InformationBox'
+import { Link } from 'react-router-dom'
 
 function Profile() {
+  const [Userinfo, setUserinfo] = useState({})
+  const [cookies] = useCookies()
+
+  useEffect(() => {
+    setUserinfo(jwt_decode(cookies.auth_token))
+  }, [cookies.auth_token])
+  
+
   return (
     <div className='flex w-[90%] rounded-xl my-7 overflow-hidden bg-white shadow-[7px_7px_21px_10px_rgba(0,0,0,0.21)] mx-auto'>
       <div className='lg:w-[21%] md:w-[27%] flex flex-col'>
         <div className='flex flex-col justify-center items-center mx-auto my-7'>
           <p className='text-2xl text-center font-unbounded text-teal-400'>MIKOTO MERN</p>
-          <div className='flex gap-x-1 self-center text-neutral-600'>
+          <div className='flex gap-x-1 self-center text-neutral-600 '>
             <p className='font-unbounded text-xs'>ORYMIKOTO</p>
             <p className='font-mrdafoe text-xs'>Developer</p>
           </div>
@@ -33,7 +45,7 @@ function Profile() {
         </div>
       </div>
       <div className=' w-full flex flex-col border-l-[0.21rem] px-7 border-neutral-100 bg-neutral-100 '>
-        <div className='flex w-full my-4 text-neutral-900 font-semibold font-poppins text-2xl'>
+        <div className='flex w-full mt-4 text-neutral-900 font-semibold font-poppins text-2xl'>
           <div className='flex flex-col'>
             <h2>Profile</h2>
             <div className='flex gap-x-1'>
@@ -42,10 +54,15 @@ function Profile() {
             </div>
           </div>
           <div className='flex flex-1 w-full justify-self-end justify-end items-center'>
-            <FaBell className='w-8 h-8 text-neutral-500 hover:text-amber-400 duration-200  rotate-[21deg]' />
+            <Link to={'/'}>
+              <div className='group flex gap-x-2 items-center'>
+                <FaArrowLeft className=' group-hover:text-red-600 gap-x-2 w-6 h-6 text-neutral-500 duration-200' />
+                <p className=' group-hover:text-red-600 font-medium text-neutral-500 font-poppins text-lg duration-200'>Return</p>
+              </div>
+            </Link>
           </div>
         </div>
-        <div className='flex flex-col items-center rounded-xl w-[13rem] border-r-2 border-b-2 bg-white my-7'>
+        <div className='flex flex-col items-center rounded-xl w-[13rem] border-r-2 border-b-2 bg-white my-4'>
           <div className=' mt-4 mb-2 w-[11rem] h-[11rem] overflow-hidden rounded-sm bg-cover bg-center hover:border-amber-400 duration-300 ease-in-out' style={{backgroundImage: 'url("/assets/pp.jpg")'}}>
             {/* <img src='/assets/pp.jpg' alt='profilepicture' /> */}
           </div>
@@ -57,15 +74,7 @@ function Profile() {
           <div className='m-4 text-neutral-900 font-medium font-poppins text-xl'>
             <h3>Profile Information</h3>
           </div>
-          <div className='container grid grid-cols-6 pb-4'>
-            <DataShow className='col-span-3 my-2 ml-4 w-[85%]' title='Name' value='Mikli Oktarianto' /> 
-            <DataShow className='col-span-3 my-2 ml-4 w-[85%]' title='Email' value='miko@mail.com' /> 
-            <DataShow className='col-span-3 my-2 ml-4 w-[85%]' title='City' value='Jember, Jawa Timur' /> 
-            <div className='flex col-start-5 col-end-7 justify-self-start px-2 rounded-md items-center self-end mb-2 hover:bg-teal-600 cursor-pointer h-[2rem] w-[85%] bg-teal-500'>
-              <FaEdit className='w-6 h-6 text-white' />
-              <p className='text-white font-medium mx-2 justify-self-center'>Edit</p>
-            </div>
-          </div>
+          <InformationBox information={[{title: 'Name', value: Userinfo.name}, {title: 'Email', value: Userinfo.email}, {title: 'Country', value: Userinfo.country}, {title: 'City', value: Userinfo.city}, {title: 'Phone Number', value: Userinfo.phone_number}]} />
         </div>
       </div>
     </div>
