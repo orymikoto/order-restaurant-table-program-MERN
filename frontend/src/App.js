@@ -4,8 +4,7 @@ import { Route, Routes } from 'react-router-dom'
 
 // Import local pages
 import Home from './pages/Home';
-import Login from './pages/users/Login';
-import Register from './pages/users/Register'
+import {Login, Register, Profile} from './pages/users'
 
 function App() {
   return (
@@ -14,6 +13,7 @@ function App() {
       <Route path='/' element={<Home />}/>
       <Route path='/login' element={<Login />}/>
       <Route path='/register' element={<Register />}/>
+      <Route path='/user/profile' element={<Profile />}/> 
     </Routes>
    </div>
   );
