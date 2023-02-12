@@ -1,5 +1,6 @@
 // NPM Package
 import React from 'react'
+import { useCookies } from 'react-cookie'
 import Footer from '../components/Footer'
 import ImageSwiperSlider from '../components/ImageSwiperSlider'
 // Local Components Package
@@ -9,9 +10,10 @@ import Navbar from '../components/Navbar'
 // title="Decide your best tables" description="There are so many tables and place to explore in MIKOTO RESTAURANT, and you will find there are so many option that will fulfil your lunch and dinner best place. In MIKOTO RESTAURANT We also make sure the air feels great and clean to maximize the taste of your dish. MIKOTO RESTAURANT Table is very well designed by our own carpenter to make your eating experience feel more comfortable, and you shall not feel anything in particular except your food taste."
 
 function Home() {
+  const [ cookies ] = useCookies()
   return (
     <div className='bg-yellow-400'>
-      <Navbar />
+      <Navbar auth={cookies.auth_token === undefined ?true:false} />
       
       <div className='flex py-7 items-center pb-7 bg-yellow-400'>
         <div className="flex flex-1 flex-col ml-[7rem]">

@@ -36,7 +36,7 @@ function Profile() {
   return (
     <div className='flex w-[90%] rounded-xl my-7 overflow-hidden bg-white shadow-[7px_7px_21px_10px_rgba(0,0,0,0.21)] mx-auto'>
       <div className='lg:w-[21%] md:w-[27%] flex flex-col'>
-        <div className='flex flex-col justify-center items-center mx-auto my-7'>
+        <div className='select-none flex flex-col justify-center items-center mx-auto my-7'>
           <p className='text-2xl text-center font-unbounded text-teal-400'>MIKOTO MERN</p>
           <div className='flex gap-x-1 self-center text-neutral-600 '>
             <p className='font-unbounded text-xs'>ORYMIKOTO</p>
@@ -44,13 +44,13 @@ function Profile() {
           </div>
         </div>
         <div className='flex flex-col gap-2 gap-y-4 h-full'>
-          <div className='font-medium text-white text-md lg:mx-5 md:mx-3 py-1 text-center font-poppins rounded-lg border-r-2 border-b-2 bg-teal-400'>
+          <div className='cursor-default font-medium text-white text-md lg:mx-5 md:mx-3 py-1 text-center font-poppins rounded-lg border-r-2 border-b-2 bg-teal-400'>
             <p>Profile</p>
           </div>
-          <div className='font-medium text-black text-md lg:mx-5 md:mx-3 hover:border-teal-400 duration-300 py-1 text-center font-poppins border-r-2 border-b-2 rounded-lg '>
+          <div className='cursor-pointer font-medium text-black text-md lg:mx-5 md:mx-3 hover:border-teal-400 duration-300 py-1 text-center font-poppins border-r-2 border-b-2 rounded-lg '>
             <p>Table Order</p>
           </div>
-          <div className='font-medium text-black text-md lg:mx-5 md:mx-3 hover:border-teal-400 duration-300 py-1 text-center font-poppins border-r-2 border-b-2 rounded-lg '>
+          <div className='cursor-pointer font-medium text-black text-md lg:mx-5 md:mx-3 hover:border-teal-400 duration-300 py-1 text-center font-poppins border-r-2 border-b-2 rounded-lg '>
             <p>Change Password</p>
           </div>
           <div className='flex flex-1 mx-auto flex-self-end items-end '>
@@ -89,7 +89,12 @@ function Profile() {
         </div>
         <div className='flex flex-col mb-7 rounded-xl border-r-2 border-b-2 bg-white lg:w-[60%] md:w-[75%]'>
           <div className='m-4 text-neutral-900 font-medium font-poppins text-xl'>
-            <h3>Profile Information</h3>
+            {
+              Editmode?
+              <h3>Edit Profile</h3>
+              :
+              <h3>Profile Information</h3>
+            }
           </div>
           {
             Editmode?
