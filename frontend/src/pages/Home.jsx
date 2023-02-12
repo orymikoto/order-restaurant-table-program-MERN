@@ -87,7 +87,7 @@ function Home() {
             </div>
           </div>
           <div className='relative rounded-3xl overflow-hidden min-w-[40%]'>
-            <ImageSwiperSlider images={['/assets/restaurant3.jpg', '/assets/restaurant2.jpg']}/>
+            <ImageSwiperSlider className='w-full h-[15rem]' images={['/assets/restaurant3.jpg', '/assets/restaurant2.jpg']}/>
           </div>
         </div>
       </div>

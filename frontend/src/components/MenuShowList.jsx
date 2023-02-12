@@ -2,11 +2,11 @@ import React from 'react'
 
 function MenuShowList({menu_list=[{name: '', description:'', image: '', price: 0}]}, className) {
   return (
-    <div className={`grid grid-cols-3 gap-[4rem] container mb-7 m-auto w-[80%] ${className}`}>
+    <div className={`grid lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-[4rem] container mb-7 m-auto w-[80%] ${className}`}>
       {
         menu_list.map((item) => 
           <div className='flex col-span-1 flex-col mx-auto items-start'>
-            <div className='flex items-center justify-center overflow-hidden h-[15rem] mb-4 rounded-tl-[7rem] rounded-br-[7rem] '>
+            <div className='flex items-center justify-center overflow-hidden h-[15rem] mb-4 md:rounded-tl-[7rem] md:rounded-br-[7rem] '>
               <img src={item.image} alt='pictureoffood' className='min-h-full min-w-full object-cover' />
             </div>
             <div className='text-neutral-900 flex-1'>

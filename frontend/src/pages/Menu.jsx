@@ -5,6 +5,11 @@ import HeadOptionImageBG from '../components/HeadOptionImageBG'
 import MenuShowList from '../components/MenuShowList'
 import Navbar from '../components/Navbar'
 
+import {RiTimeLine} from 'react-icons/ri'
+import {BiDish} from 'react-icons/bi'
+import {GiCoffeeCup} from 'react-icons/gi'
+import ImageSwiperSlider from '../components/ImageSwiperSlider'
+
 function Menu() {
   const [cookies] = useCookies()
   const [menu, setMenu] = useState(0)
@@ -37,6 +42,28 @@ function Menu() {
   return (
     <div className=''>
       <Navbar auth={cookies.auth_token === undefined ?true:false}/>
+      <div className='flex flex-col items-center my-4  '>
+        <h2 className='text-5xl text-amber-500 font-unbounded'>MENU LIST</h2>
+        {/* <p className='text-center text-xs my-2 font-medium text-neutral-500 w-[30%]'>This is the menu part of Mikoto MERN Restaurant. Here you will find almost all the menu that we served but not include our day's special meals. All the meals we served is using the best ingredients and cooked by the most professional adn the best chef so it is guaranteed that the meals you eat will taste good. P.S. Our restaurant do not responsible if you are addicted to our meals</p> */}
+        <ImageSwiperSlider className={'h-[21rem] mt-7 rounded-3xl bg-slate-200 w-[35rem]'} images={['/assets/menu_list/bf6.jpg', '/assets/menu_list/bf1.jpg', '/assets/menu_list/d3.jpg', '/assets/menu_list/d4.jpg', '/assets/menu_list/bv4.jpg', '/assets/menu_list/bv6.jpg']} />
+        <div className=' gap-x-16 flex justify-between w-[60%] mb-7 mt-[4rem]'>
+          <div className='flex flex-col items-center'>
+            <RiTimeLine className='w-11 h-11 text-amber-500' />
+            <h4 className='text-neutral-900 font-medium font-poppins text-lg'>Fast Serve</h4>
+            <p className='text-neutral-500 font-normal text-xs text-center'>We are trying to give the fastest possible to serve our food to our customer but still mantain best cooked level of our food</p>
+          </div>
+          <div className='flex flex-col items-center'>
+            <BiDish className='w-11 h-11 text-amber-500' />
+            <h4 className='text-neutral-900 font-medium font-poppins text-lg'>Best Taste</h4>
+            <p className='text-neutral-500 font-normal text-xs text-center'>We are very well known for the taste of our meals and in Mikoto MERN Restaurant it is guaranteed that you feel the best cook in town</p>
+          </div>
+          <div className='flex flex-col items-center'>
+            <GiCoffeeCup className='w-11 h-11 text-amber-500' />
+            <h4 className='text-neutral-900 font-medium font-poppins text-lg'>Convenient Place</h4>
+            <p className='text-neutral-500 font-normal text-xs text-center'>We are designed our room and place to be convenient as hard as possible so customer can focusing on the taste of the food</p>
+          </div>
+        </div>
+      </div>
       <HeadOptionImageBG onChange={handleChange} className="my-7" header={[ 
         {tittle: 'Breakfast', name: 'breakfast', bg: '/assets/restaurant1.jpg' }, 
         {tittle: 'Lunch', name: 'lunch', bg: '/assets/restaurant2.jpg' }, 

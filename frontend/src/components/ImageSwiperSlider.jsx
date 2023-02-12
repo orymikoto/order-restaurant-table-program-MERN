@@ -9,13 +9,13 @@ import 'swiper/css/autoplay'
 
 // SwiperCore.use([Navigation])
 
-function ImageSwiperSlider({images}) {
+function ImageSwiperSlider({images, className}) {
   return (
-        <Swiper autoplay={{delay:3000}} className='w-full h-[15rem]' modules={[Navigation, Autoplay, A11y]} loop={true} navigation >
+        <Swiper autoplay={{delay:3000}} className={className} modules={[Navigation, Autoplay, A11y]} loop={true} navigation >
           {
             images.map((i) => 
               <SwiperSlide className='text-center'>
-                <img src={i} className='w-full' alt="mikotopic" />
+                <img src={i} className='w-full h-full object-cover object-center' alt="mikotopic" />
               </SwiperSlide>
             )
           }
