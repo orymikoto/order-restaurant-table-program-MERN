@@ -11,6 +11,7 @@ import TableOrder from './components/TableOrder'
 
 function Profile() {
   const [Userinfo, setUserinfo] = useState({})
+  const [Tableordered, setTableordered] = useState([])
   // const [Editmode, setEditmode] = useState(false)
   const [Menu, setMenu] = useState(0)
   const [Password, setPassword] = useState({
@@ -80,10 +81,14 @@ function Profile() {
     axios.get( process.env.REACT_APP_SERVER_URL + '/users/profile', { headers : {"Authorization": `Bearer ${cookies.auth_token}`}}).then((res) => {
       setUserinfo(res.data.data)
     })
+
+    axios.get(process.env.REACT_APP_SERVER_URL + '/users/table-ordered', { headers : {"Authorization": `Bearer ${cookies.auth_token}`}}).then((res) => {
+      // console.log(res.data.data.table_ordered);
+      setTableordered(res.data.data.table_ordered)
+    })
     
   }, [cookies.auth_token])
   
-
   return (
     <div className='flex w-[90%] rounded-xl my-7 overflow-hidden bg-white shadow-[7px_7px_21px_10px_rgba(0,0,0,0.21)] mx-auto'>
       <div className='lg:w-[21%] md:w-[27%] flex flex-col'>
@@ -115,7 +120,7 @@ function Profile() {
       
       {
         Menu === 0 ? <ProfileContent messageHandler={messageHandler} handleChange={handleChange} onSubmited={onSubmited} Userinfo={Userinfo} />
-        : Menu === 1 ? <TableOrder />
+        : Menu === 1 ? <TableOrder table_ordered={Tableordered} />
         // : <p>password</p>
         : <ChangePassword onSubmited={submitChangePassword} handleChange={handlePasswordChange} data={Password} />
       }

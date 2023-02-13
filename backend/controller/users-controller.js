@@ -132,6 +132,21 @@ export const update_profile = async (req, res) => {
   }
 }
 
+// Get table ordered populated
+export const get_table_order = async (req, res) => {
+  try {
+    const user_info = jwt.decode(req.headers['authorization'].split(" ")[1])
+    const user = await user_model.findOne({email: user_info.email}).select('table_ordered -_id').populate({path: 'table_ordered', populate: { path: 'table_id'}, options: {sort: {'rent_time.start': -1 }}})
+    if(!user){
+      return res.status(404).json({message: 'User not found please re-login'})
+    }
+    return res.status(200).json({message: 'User table order is retrieved sucessfully', data: user})
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({message: 'something went wrong', error: error})
+  }
+}
+
 export const upload_picture = async (req, res) => {
   try {
     await user_model.updateOne({email: req.body.email}, {

@@ -117,7 +117,7 @@ export const create_users_table_order = async (req, res) => {
     })
 
     const user_info = jwt.decode(req.headers['authorization'].split(" ")[1])
-    const save_to_user = await user_schema.findByIdAndUpdate(user_info.id, {
+    const save_to_user = await user_schema.findOneAndUpdate({email: user_info.email}, {
       $push: {
         table_ordered: new_table_order._id
       }
