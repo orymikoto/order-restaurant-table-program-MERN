@@ -1,16 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { useCookies } from 'react-cookie'
-// import {FaArrowLeft} from 'react-icons/fa'
 import {FiLogOut} from 'react-icons/fi'
-// import jwt_decode from 'jwt-decode'
 import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
 
-// import InformationBox from '../../components/InformationBox'
-// import { Link } from 'react-router-dom'
-// import EditInformationBox from '../../components/EditInformationBox'
-import ProfileContent from '../../components/ProfileContent'
-import ChangePassword from './ChangePassword'
+import ProfileContent from './components/ProfileContent'
+import ChangePassword from './components/ChangePassword'
 import PopupMessage from '../../components/PopupMessage'
+import TableOrder from './components/TableOrder'
 
 function Profile() {
   const [Userinfo, setUserinfo] = useState({})
@@ -26,7 +23,9 @@ function Profile() {
     title: '',
     message: ''
   })
-  const [cookies] = useCookies()
+  const [cookies, , removeCookies] = useCookies()
+  const navigate = useNavigate()
+
 
   const handleChange = (e) => {
     setUserinfo((prevState) => {
@@ -57,12 +56,24 @@ function Profile() {
     })
   }
 
+  const RemoveSession = () => {
+    removeCookies('auth_token', {path: '/'})
+    return navigate("/login")
+  }
+
   const submitChangePassword = (e) => {
     e.preventDefault()
     axios.patch( process.env.REACT_APP_SERVER_URL + '/users/change-password', Password, { headers: {"Authorization": `Bearer ${cookies.auth_token}`}}).then((res) => {
       console.log(res)
-    }).catch((err) => 
-    console.log(err))
+      messageHandler(true, 'Password Updated', res.data.message + ", You will be navigated to re-login")
+      if(res.status === 200){
+        setTimeout(RemoveSession, 2000)
+      }
+    }).catch((err) =>{
+      console.log(err)
+      messageHandler(true, 'Error Occured', err.response.data.message)
+    })
+
   }
 
   useEffect(() => {
@@ -104,9 +115,9 @@ function Profile() {
       
       {
         Menu === 0 ? <ProfileContent messageHandler={messageHandler} handleChange={handleChange} onSubmited={onSubmited} Userinfo={Userinfo} />
-        : Menu === 1 ? <p>test</p> 
+        : Menu === 1 ? <TableOrder />
         // : <p>password</p>
-        : <ChangePassword messageHandler={messageHandler} onSubmited={submitChangePassword} handleChange={handlePasswordChange} data={Password} />
+        : <ChangePassword onSubmited={submitChangePassword} handleChange={handlePasswordChange} data={Password} />
       }
       {
         Showmessage.show?

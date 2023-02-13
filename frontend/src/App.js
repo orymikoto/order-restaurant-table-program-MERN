@@ -6,7 +6,7 @@ import { Route, Routes } from 'react-router-dom'
 import Home from './pages/Home';
 import Menu from './pages/Menu';
 import {Login, Register, Profile} from './pages/users'
-import ChangePassword from './pages/users/ChangePassword';
+import ChangePassword from './pages/users/components/ChangePassword';
 
 function App() {
   return (

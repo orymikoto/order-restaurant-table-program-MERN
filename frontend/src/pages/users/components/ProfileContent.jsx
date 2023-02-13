@@ -2,8 +2,8 @@ import React, {useState} from 'react'
 import { Link } from 'react-router-dom'
 import { FaArrowLeft } from 'react-icons/fa'
 
-import EditInformationBox from './EditInformationBox'
-import InformationBox from './InformationBox'
+import EditInformationBox from '../../../components/EditInformationBox'
+import InformationBox from '../../../components/InformationBox'
 
 function ProfileContent({handleChange, onSubmited, Userinfo, messageHandler}) {
   const [Editmode, setEditmode] = useState(false)

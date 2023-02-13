@@ -90,16 +90,24 @@ export const get_user_profile = async (req, res) => {
 
 // Update user password punction
 export const password_update = async (req, res) => {
-  const {email, new_password, confirm_new_password} = req.body
-  // const sentToken = req.body.token
+  const {password, new_password, confirm_new_password} = req.body
+  const token = jwt.decode(req.headers['authorization'].split(" ")[1])
   try {
     if(confirm_new_password != new_password){
-      return res.status(400).json({message: "password not match"})
+      return res.status(400).json({message: "New password not match"})
     }
+    
+    const user = await user_model.findOne({email: token.email})
+    const check_password = await bcrypt.compare(password, user.password)
+    if(!check_password){
+      return res.status(400).json({message: "old password wrong"})
+    }
+
     const encrypt_password = await bcrypt.hash(new_password, 12)
-    await user_model.updateOne({email: email}, {
+    await user_model.updateOne({email: token.email}, {
         password: encrypt_password,
     })
+
     return res.status(200).json({message: "password successfully updated"})
   } catch (error) {
     console.log(error);
@@ -143,7 +151,7 @@ export const upload_picture = async (req, res) => {
 export const deactivate_user = async (req, res) => {
   try {
     const token = jwt.decode(req.headers['authorization'].split(" ")[1])
-    const target_user = await user_model.updateOne({_id: token.id}, {
+    const target_user = await user_model.updateOne({email: token.email}, {
       user_active: false
     })
 
