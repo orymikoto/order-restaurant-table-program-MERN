@@ -66,7 +66,7 @@ function Home() {
       <div className='flex my-7 flex-col w-[85%] m-auto'>
         <div className='flex my-7 gap-x-7'>
           <div className='relative rounded-3xl overflow-hidden min-w-[40%]'>
-            <ImageSwiperSlider images={['/assets/restaurant1.jpg', '/assets/restaurant4.jpg']}/>
+            <ImageSwiperSlider className='w-full h-[15rem]' images={['/assets/restaurant1.jpg', '/assets/restaurant4.jpg']}/>
           </div>
           <div className='flex flex-col'>
             <div className='text-3xl mb-4 font-bold text-neutral-100'>

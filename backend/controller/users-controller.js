@@ -74,7 +74,8 @@ export const register = async (req, res) => {
 export const get_user_profile = async (req, res) => {
   try {
     const token = jwt.decode(req.headers['authorization'].split(" ")[1])
-    const user_profile = await user_model.findById(token.id, {
+    const user_profile = await user_model.findOne({email: token.email}, {
+      _id: 0,
       password: 0,
     })
     if (!user_model) {
@@ -108,14 +109,17 @@ export const password_update = async (req, res) => {
 
 // Update user profile function
 export const update_profile = async (req, res) => {
-  const {email, address, name, } = req.body
+  const {email, country, city, name, phone_number} = req.body
   try {
-    user_update = await user_model.findOneAndUpdate({email: email}, {
-      address: address,
-      name: name
+    const user_update = await user_model.findOneAndUpdate({email: email}, {
+      country: country,
+      city: city,
+      name: name,
+      phone_number: phone_number
     })
-    return res.status(200).json({ message: 'user successfully updated', result: {name: name, address: address}})
+    return res.status(200).json({ message: 'user successfully updated', data: {name: user_update.name, country: user_update.country, city: user_update.city, phone_number:  user_update.phone_number }})
   } catch (error) {
+    console.log(error);
     return res.status(500).json({message: 'something went wrong', error: error})
   }
 }
