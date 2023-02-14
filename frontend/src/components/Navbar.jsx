@@ -13,7 +13,7 @@ function Navbar({auth}) {
       </div>
 
       <div className='flex mr-7 gap-x-7' /* Navigation */>
-        <Link to={'/'} className='p-2 text-lg cursor-pointer font-medium text-neutral-400 hover:text-neutral-100'>Tables</Link>
+        <Link to={'/table'} className='p-2 text-lg cursor-pointer font-medium text-neutral-400 hover:text-neutral-100'>Tables</Link>
         <Link to={'/menu'} className='p-2 text-lg cursor-pointer font-medium text-neutral-400 hover:text-neutral-100'>Menu</Link>
         <Link to={'/'} className='p-2 text-lg cursor-pointer font-medium text-neutral-400 hover:text-neutral-100'>About</Link>
       </div>

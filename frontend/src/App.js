@@ -5,6 +5,7 @@ import { Route, Routes } from 'react-router-dom'
 // Import local pages
 import Home from './pages/Home';
 import Menu from './pages/Menu';
+import Tables from './pages/table_orders/Tables';
 import {Login, Register, Profile} from './pages/users'
 import ChangePassword from './pages/users/components/ChangePassword';
 
@@ -18,6 +19,7 @@ function App() {
       <Route path='/user/profile' element={<Profile />}/> 
       <Route path='/user/change-password' element={<ChangePassword />}/>
       <Route path='/menu' element={<Menu />} />
+      <Route path='/table' element={<Tables />} />
     </Routes>
    </div>
   );
