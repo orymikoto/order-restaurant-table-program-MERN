@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import InputText from '../../components/InputText'
 import axios from 'axios'
 import { Cookies } from 'react-cookie'
 import moment from 'moment'
@@ -8,9 +7,16 @@ import {Link} from 'react-router-dom'
 import {AiFillGoogleCircle} from 'react-icons/ai'
 import {FaFacebook, FaTelegram} from 'react-icons/fa'
 
+import InputText from '../../components/InputText'
+import PopupMessage from '../../components/PopupMessage'
+
 function Login() {
 
-  const [message, setMessage] = useState('')
+  const [Showmessage, setShowmessage] = useState({
+    show: false,
+    title: '',
+    message: ''
+  })
   const [input, setInput] = useState( {
     "email": "",
     "password": ""
@@ -18,6 +24,15 @@ function Login() {
 
   const cookies = new Cookies();
   const exp_time = moment().add(3, 'h').toDate()
+
+  const messageHandler = (show, title, message) => {
+    console.log('message handler:', show,  title, message);
+    setShowmessage({
+      show: show,
+      title: title,
+      message: message
+    })
+  }
 
   const handleChange = (e) => {
     setInput((prevState) => {
@@ -30,12 +45,13 @@ function Login() {
     axios.post( process.env.REACT_APP_SERVER_URL + '/users/login', input).then((res) => {
       console.log(res)
       cookies.set('auth_token', res.data.token, { path: '/', expires: exp_time})
-      setMessage(res.data.message)
-    }).catch((err) => 
-    console.log(err))
+      messageHandler(true, 'Login Success', res.data.message)
+    }).catch((err) => {
+      messageHandler(true, 'Login Failed', err.response.data.message)
+      console.log(err)
+    })
   }
 
-  console.log(message)
   return (
     <div className='flex w-[80%] mt-[3rem] m-auto rounded-3xl overflow-hidden shadow-[7px_21px_25px_-7px_rgba(0,0,0,0.5)]'>
       <div className='flex gap-2 w-[30%] flex-col'>
@@ -67,8 +83,12 @@ function Login() {
         </div>
       </div>
       <div style={{ backgroundImage: 'url("/assets/restlogin.jpg")'}} className='bg-cover flex w-[70%] h-[80vh]'>
-        
-        </div>
+      </div>
+      {
+        Showmessage.show?
+        <PopupMessage handleChange={messageHandler} message={Showmessage.message} title={Showmessage.title} />
+        :null
+      }
     </div>
   )
 }

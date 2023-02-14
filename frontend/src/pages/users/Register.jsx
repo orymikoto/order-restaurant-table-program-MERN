@@ -7,9 +7,14 @@ import moment from 'moment'
 
 import {AiFillGoogleCircle} from 'react-icons/ai'
 import {FaFacebook, FaTelegram} from 'react-icons/fa'
+import PopupMessage from '../../components/PopupMessage'
 
 function Register() {
-  const [message, setMessage] = useState('')
+  const [Showmessage, setShowmessage] = useState({
+    show: false,
+    title: '',
+    message: ''
+  })
   const [input, setInput] = useState( {
     "name": "",
     "email": "",
@@ -20,7 +25,16 @@ function Register() {
 
   const cookies = new Cookies();
   const exp_time = moment().add(3, 'h').toDate()
-
+  
+  const messageHandler = (show, title, message) => {
+    console.log('message handler:', show,  title, message);
+    setShowmessage({
+      show: show,
+      title: title,
+      message: message
+    })
+  }
+  
   const handleChange = (e) => {
     setInput((prevState) => {
       return {...prevState, ...{ [e.target.name] : e.target.value}}
@@ -32,12 +46,12 @@ function Register() {
     axios.post( process.env.REACT_APP_SERVER_URL + '/users/register', input).then((res) => {
       console.log(res)
       cookies.set('auth-token', res.data.token, { path: '/', expires: exp_time})
-      setMessage(res.data.message)
-    }).catch((err) => 
-    console.log(err))
+      messageHandler(true, 'Register Success', res.data.message)
+    }).catch((err) => {
+      messageHandler(true, 'Register Failed', err.response.data.message)
+      console.log(err)
+    })
   }
-
-  console.log(message)
 
   return (
     <div className='flex w-[80%] mt-[2rem] m-auto rounded-3xl overflow-hidden shadow-[7px_21px_25px_-7px_rgba(0,0,0,0.5)]'>
@@ -73,8 +87,12 @@ function Register() {
         </div>
       </div>
       <div style={{ backgroundImage: 'url("/assets/restlogin.jpg")'}} className='bg-cover flex w-[70%]'>
-        
-        </div>
+      </div>
+      {
+        Showmessage.show?
+        <PopupMessage handleChange={messageHandler} message={Showmessage.message} title={Showmessage.title} />
+        :null
+      }
     </div>
   )
 }

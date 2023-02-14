@@ -42,7 +42,7 @@ export const login = async (req, res) => {
     }
 
     const token = jwt.sign({ email: existing_user.email, name: existing_user.name, country: existing_user.country, city: existing_user.city, phone_number: existing_user.phone_number}, process.env.SECRET, { expiresIn: "3h"})
-    res.status(200).json({ email: existing_user.email, name: existing_user.name, token})
+    res.status(200).json({ message: `Login is success, wellcome ${existing_user.name}`, email: existing_user.email, name: existing_user.name, token})
   } catch (error) {
     res.status(500).json({ message: "Something went wrong", error: error})
   }
@@ -61,7 +61,7 @@ export const register = async (req, res) => {
     const result = await user_model.create({ email, password: hashedPassword, name: name, country: country, city: city, phone_number: phone_number })
     const token = jwt.sign({ email: result.email, name: result.name, country: result.country, city: result.city, phone_number: result.phone_number}, process.env.SECRET, { expiresIn: "3h"})
 
-    res.status(200).json({ email: result.email, name: result.name, message: 'users sucessfully created', token})
+    res.status(200).json({ email: result.email, name: result.name, message: 'users sucessfully created, you will be redirected to Home Page', token})
 
   } catch (error) {
     console.log(error);
