@@ -1,21 +1,28 @@
 import React, {  useRef } from 'react'
 
-function FloorPlan({className, order_data=[], onclick}) {
+function FloorPlan({className, order_data=[], onclick, call_state, active}) {
   const classname_table = 'fill-neutral-500 stroke-neutral-500 cursor-pointer hover:fill-teal-600 hover:stroke-teal-600 duration-300 ease-in-out'
 
   const ref = useRef([])
 
   // const tes = ref.current[1]
   // tes.className.baseVal = 'fill-amber-500 stroke-amber-500'
-  ref.current?.map((item) => {
+  ref.current?.map((item, index) => {
     if(order_data.includes(item?.id)){
       return item ? item.className.baseVal = 'fill-red-500 stroke-red-500': null
+    }else if(index === active){
+      return ref.current[index].className.baseVal = 'fill-teal-600 stroke-teal-600 hover:fill-neutral-500 hover:stroke-neutral-500'
     }else{
       return item ? item.className.baseVal = classname_table: null
     }
   })
 
-  console.log(ref.current[0]);
+  const selected = (e) => {
+    call_state(e)
+  }
+
+
+  // console.log(ref.current[0]);
 
 
   return (
@@ -31,6 +38,7 @@ function FloorPlan({className, order_data=[], onclick}) {
       
       {/* ID 1 */}
       <g onClick={() => {
+        selected(0)
         onclick({
           image:'/assets/table_detail/mr4.jpg', 
           ac:true, 
@@ -75,6 +83,7 @@ function FloorPlan({className, order_data=[], onclick}) {
 
       {/* ID 2 */}
       <g onClick={() => {
+        selected(1)
         onclick({
           image:'/assets/table_detail/mr4.jpg', 
           ac:true, 
@@ -114,6 +123,7 @@ function FloorPlan({className, order_data=[], onclick}) {
 
       {/* ID 3 */}
       <g onClick={() => {
+        selected(2)
         onclick({
           image:'/assets/table_detail/mr4.jpg', 
           ac:true, 
@@ -153,6 +163,7 @@ function FloorPlan({className, order_data=[], onclick}) {
 
       {/* ID 4 */}
       <g onClick={() => {
+        selected(3)
         onclick({
           image:'/assets/table_detail/mr4.jpg', 
           ac:true, 
@@ -161,7 +172,7 @@ function FloorPlan({className, order_data=[], onclick}) {
           room_name: 'Main_room', 
           chair_amount:4, 
           description:'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ab placeat saepe quia autem excepturi, modi explicabo numquam corporis, voluptas, quis sit. Perspiciatis, quae architecto.'})
-        }}  ref={(e) => {ref.current[18] = e}} id='mt_mr_4' className={classname_table}>
+        }}  ref={(e) => {ref.current[3] = e}} id='mt_mr_4' className={classname_table}>
         <rect
           width="61.766"
           height="63.56"
@@ -192,6 +203,7 @@ function FloorPlan({className, order_data=[], onclick}) {
 
       {/* ID 5 */}
       <g onClick={() => {
+        selected(4)
         onclick({
           image:'/assets/table_detail/mr4.jpg', 
           ac:true, 
@@ -231,6 +243,7 @@ function FloorPlan({className, order_data=[], onclick}) {
 
       {/* MEETING ROOM */}
       <g onClick={() => {
+        selected(5)
         onclick({
           image:'/assets/table_detail/meet.jpg', 
           ac:true, 
@@ -295,6 +308,7 @@ function FloorPlan({className, order_data=[], onclick}) {
 
       {/* VIP 1 */}
       <g onClick={() => {
+        selected(6)
         onclick({
           image:'/assets/table_detail/vip.jpg', 
           ac:true, 
@@ -348,6 +362,7 @@ function FloorPlan({className, order_data=[], onclick}) {
 
       {/* VIP 2 */}
       <g onClick={() => {
+        selected(7)
         onclick({
           image:'/assets/table_detail/vip.jpg', 
           ac:true, 
@@ -400,6 +415,7 @@ function FloorPlan({className, order_data=[], onclick}) {
 
       {/* Out 1 */}
       <g onClick={() => {
+        selected(8)
         onclick({
           image:'/assets/table_detail/od4.jpg', 
           ac: false, 
@@ -432,6 +448,7 @@ function FloorPlan({className, order_data=[], onclick}) {
       
       {/* Out 2 */}
       <g onClick={() => {
+        selected(9)
         onclick({
           image:'/assets/table_detail/od4.jpg', 
           ac: false, 
@@ -464,6 +481,7 @@ function FloorPlan({className, order_data=[], onclick}) {
 
        {/* Out 3 */}
       <g onClick={() => {
+        selected(10)
         onclick({
           image:'/assets/table_detail/od4.jpg', 
           ac: false, 
@@ -496,6 +514,7 @@ function FloorPlan({className, order_data=[], onclick}) {
       
       {/* Out 4 */}
       <g onClick={() => {
+        selected(11)
         onclick({
           image:'/assets/table_detail/od4.jpg', 
           ac: false, 
@@ -528,6 +547,7 @@ function FloorPlan({className, order_data=[], onclick}) {
 
       {/* Big Main 5 */}
       <g onClick={() => {
+        selected(12)
         onclick({
           image:'/assets/table_detail/mr6.jpg', 
           ac: true, 
@@ -573,6 +593,7 @@ function FloorPlan({className, order_data=[], onclick}) {
 
       {/* Big Main 3 */}
       <g onClick={() => {
+        selected(13)
         onclick({
           image:'/assets/table_detail/mr6.jpg', 
           ac: true, 
@@ -618,6 +639,7 @@ function FloorPlan({className, order_data=[], onclick}) {
 
       {/* Big Main 4 */}
       <g onClick={() => {
+        selected(14)
         onclick({
           image:'/assets/table_detail/mr6.jpg', 
           ac: true, 
@@ -663,6 +685,7 @@ function FloorPlan({className, order_data=[], onclick}) {
 
       {/* Big Main 2 */}
       <g onClick={() => {
+        selected(15)
         onclick({
           image:'/assets/table_detail/mr6.jpg', 
           ac: true, 
@@ -708,6 +731,7 @@ function FloorPlan({className, order_data=[], onclick}) {
 
       {/* Big Main 1 */}
       <g onClick={() => {
+        selected(16)
         onclick({
           image:'/assets/table_detail/mr6.jpg', 
           ac: true, 
@@ -753,6 +777,7 @@ function FloorPlan({className, order_data=[], onclick}) {
 
       {/* small main 9 */}
       <g onClick={() => {
+        selected(17)
         onclick({
           image:'/assets/table_detail/mr.jpg', 
           ac: true, 
@@ -768,6 +793,7 @@ function FloorPlan({className, order_data=[], onclick}) {
 
       {/* small main 8 */}
       <g onClick={() => {
+        selected(18)
         onclick({
           image:'/assets/table_detail/mr.jpg', 
           ac: true, 
@@ -776,13 +802,14 @@ function FloorPlan({className, order_data=[], onclick}) {
           room_name: 'main_room', 
           chair_amount:2, 
           description:'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ab placeat saepe quia autem excepturi, modi explicabo numquam corporis, voluptas, quis sit. Perspiciatis, quae architecto.'})
-        }} ref={(e) => {ref.current[19] = e}} id='st_mr_8' className={classname_table}>
+        }} ref={(e) => {ref.current[18] = e}} id='st_mr_8' className={classname_table}>
         <ellipse cx="629" cy="393" rx="13.333" ry="13"></ellipse>
         <path d="M645 383.467v18.2M613 383.467v18.2"></path>
       </g>
 
       {/* small main 7 */}
       <g onClick={() => {
+        selected(19)
         onclick({
           image:'/assets/table_detail/mr.jpg', 
           ac: true, 
@@ -791,13 +818,14 @@ function FloorPlan({className, order_data=[], onclick}) {
           room_name: 'main_room', 
           chair_amount:2, 
           description:'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ab placeat saepe quia autem excepturi, modi explicabo numquam corporis, voluptas, quis sit. Perspiciatis, quae architecto.'})
-        }} ref={(e) => {ref.current[20] = e}} id='st_mr_7' className={classname_table}>
+        }} ref={(e) => {ref.current[19] = e}} id='st_mr_7' className={classname_table}>
         <ellipse cx="686.5" cy="393" rx="13.75" ry="13"></ellipse>
         <path d="M703 383.467v18.2M670 383.467v18.2"></path>
       </g>
 
       {/* small main 6 */}
       <g onClick={() => {
+        selected(20)
         onclick({
           image:'/assets/table_detail/mr.jpg', 
           ac: true, 
@@ -806,13 +834,14 @@ function FloorPlan({className, order_data=[], onclick}) {
           room_name: 'main_room', 
           chair_amount:2, 
           description:'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ab placeat saepe quia autem excepturi, modi explicabo numquam corporis, voluptas, quis sit. Perspiciatis, quae architecto.'})
-        }} ref={(e) => {ref.current[21] = e}} id='st_mr_6' className={classname_table}>
+        }} ref={(e) => {ref.current[20] = e}} id='st_mr_6' className={classname_table}>
         <ellipse cx="744" cy="393" rx="13.333" ry="13"></ellipse>
         <path d="M760 383.467v18.2M728 383.467v18.2"></path>
       </g>
 
       {/* small main 5 */}
       <g onClick={() => {
+        selected(21)
         onclick({
           image:'/assets/table_detail/mr.jpg', 
           ac: true, 
@@ -821,12 +850,13 @@ function FloorPlan({className, order_data=[], onclick}) {
           room_name: 'main_room', 
           chair_amount:2, 
           description:'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ab placeat saepe quia autem excepturi, modi explicabo numquam corporis, voluptas, quis sit. Perspiciatis, quae architecto.'})
-        }} ref={(e) => {ref.current[22] = e}} id='st_mr_5' className={classname_table}>
+        }} ref={(e) => {ref.current[21] = e}} id='st_mr_5' className={classname_table}>
         <ellipse cx="801" cy="393" rx="13.333" ry="13"></ellipse>
         <path d="M817 383.467v18.2M785 383.467v18.2"></path>
       </g>
       {/* small main 4 */}
       <g onClick={() => {
+        selected(22)
         onclick({
           image:'/assets/table_detail/mr.jpg', 
           ac: true, 
@@ -835,12 +865,13 @@ function FloorPlan({className, order_data=[], onclick}) {
           room_name: 'main_room', 
           chair_amount:2, 
           description:'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ab placeat saepe quia autem excepturi, modi explicabo numquam corporis, voluptas, quis sit. Perspiciatis, quae architecto.'})
-        }} ref={(e) => {ref.current[23] = e}} id='st_mr_4' className={classname_table}>
+        }} ref={(e) => {ref.current[22] = e}} id='st_mr_4' className={classname_table}>
         <ellipse cx="858" cy="393" rx="13.333" ry="13"></ellipse>
         <path d="M874 383.467v18.2M842 383.467v18.2"></path>
       </g>
       {/* small main 3 */}
       <g onClick={() => {
+        selected(23)
         onclick({
           image:'/assets/table_detail/mr.jpg', 
           ac: true, 
@@ -849,12 +880,13 @@ function FloorPlan({className, order_data=[], onclick}) {
           room_name: 'main_room', 
           chair_amount:2, 
           description:'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ab placeat saepe quia autem excepturi, modi explicabo numquam corporis, voluptas, quis sit. Perspiciatis, quae architecto.'})
-        }} ref={(e) => {ref.current[24] = e}} id='st_mr_3' className={classname_table}>
+        }} ref={(e) => {ref.current[23] = e}} id='st_mr_3' className={classname_table}>
         <ellipse cx="916" cy="393" rx="13.333" ry="13"></ellipse>
         <path d="M932 383.467v18.2M900 383.467v18.2"></path>
       </g>
       {/* small main 2 */}
       <g onClick={() => {
+        selected(24)
         onclick({
           image:'/assets/table_detail/mr.jpg', 
           ac: true, 
@@ -863,12 +895,13 @@ function FloorPlan({className, order_data=[], onclick}) {
           room_name: 'main_room', 
           chair_amount:2, 
           description:'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ab placeat saepe quia autem excepturi, modi explicabo numquam corporis, voluptas, quis sit. Perspiciatis, quae architecto.'})
-        }} ref={(e) => {ref.current[25] = e}} id='st_mr_2' className={classname_table}>
+        }} ref={(e) => {ref.current[24] = e}} id='st_mr_2' className={classname_table}>
         <ellipse cx="973" cy="393" rx="13.333" ry="13"></ellipse>
         <path d="M989 383.467v18.2M957 383.467v18.2"></path>
       </g>
       {/* small main 1 */}
       <g onClick={() => {
+        selected(25)
         onclick({
           image:'/assets/table_detail/mr.jpg', 
           ac: true, 
@@ -877,7 +910,7 @@ function FloorPlan({className, order_data=[], onclick}) {
           room_name: 'main_room', 
           chair_amount:2, 
           description:'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ab placeat saepe quia autem excepturi, modi explicabo numquam corporis, voluptas, quis sit. Perspiciatis, quae architecto.'})
-        }} ref={(e) => {ref.current[26] = e}} id='st_mr_1' className={classname_table}>
+        }} ref={(e) => {ref.current[25] = e}} id='st_mr_1' className={classname_table}>
         <ellipse cx="1030" cy="393" rx="13.333" ry="13"></ellipse>
         <path d="M1046 383.467v18.2M1014 383.467v18.2"></path>
       </g>
