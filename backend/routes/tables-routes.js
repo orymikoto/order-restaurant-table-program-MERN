@@ -12,5 +12,6 @@ router.get('/all-tables', auth, controller.get_all_tables)
 router.post('/create', auth, controller.create_table)
 router.patch('/update', auth, controller.update_table)
 router.delete('/', auth, controller.soft_delete_table)
+router.get('/update-all', auth, controller.update_all)
 
 export default router

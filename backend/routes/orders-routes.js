@@ -16,7 +16,7 @@ router.delete('/delete-admin', controller.delete_table_order_admin)
 
 // Router Users
 router.post('/check-table-future', auth, controller.check_table_id_order)
-router.post('/check-table-time', auth, controller.check_table_id_order_with_time)
+router.post('/check-table-time', auth, controller.check_table_order_with_time)
 router.post('/create-user', auth, controller.create_users_table_order)
 router.delete('/delete-user', auth, controller.delete_table_order_users)
 

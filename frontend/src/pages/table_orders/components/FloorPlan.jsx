@@ -1,6 +1,22 @@
-import React from 'react'
+import React, {  useRef } from 'react'
 
-function FloorPlan({className}) {
+function FloorPlan({className, order_data=[]}) {
+  const classname_table = 'fill-neutral-500 stroke-neutral-500 cursor-pointer hover:fill-teal-600 hover:stroke-teal-600 duration-300 ease-in-out'
+
+  const ref = useRef([])
+
+  // const tes = ref.current[1]
+  // tes.className.baseVal = 'fill-amber-500 stroke-amber-500'
+  ref.current?.map((item) => {
+    if(order_data.includes(item?.id)){
+      return item ? item.className.baseVal = 'fill-red-500 stroke-red-500': null
+    }else{
+      return item? item.className.baseVal = classname_table: null
+      
+    }
+  })
+
+
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -13,7 +29,7 @@ function FloorPlan({className}) {
       <path fill="#fff" d="M0 0H1200V800H0z"></path>
       
       {/* ID 1 */}
-      <g className='stroke-neutral-500 cursor-pointer hover:fill-neutral-300 duration-300 ease-in-out fill-neutral-500'>
+      <g ref={(e) => ref.current.push(e)} id='mt_mr_1' className={classname_table}>
         <rect
           width="61.766"
           height="63.56"
@@ -47,7 +63,7 @@ function FloorPlan({className}) {
       </g>
 
       {/* ID 2 */}
-      <g className='stroke-neutral-500 cursor-pointer hover:fill-neutral-300 duration-300 ease-in-out fill-neutral-500'>
+      <g ref={(e) => ref.current.push(e)} id='mt_mr_2' className={classname_table}>
         <rect
           width="61.766"
           height="63.56"
@@ -77,7 +93,7 @@ function FloorPlan({className}) {
       </g>
 
       {/* ID 3 */}
-      <g className='stroke-neutral-500 cursor-pointer hover:fill-neutral-300 duration-300 ease-in-out fill-neutral-500'>
+      <g ref={(e) => ref.current.push(e)} id='mt_mr_3' className={classname_table}>
         <path
           strokeLinecap="round"
           d="M0.5 -0.5L27.252 -0.5"
@@ -107,7 +123,7 @@ function FloorPlan({className}) {
       </g>
 
       {/* ID 4 */}
-      <g className='stroke-neutral-500 cursor-pointer hover:fill-neutral-300 duration-300 ease-in-out fill-neutral-500'>
+      <g ref={(e) => ref.current.push(e)} id='mt_mr_4' className={classname_table}>
         <rect
           width="61.766"
           height="63.56"
@@ -137,7 +153,7 @@ function FloorPlan({className}) {
       </g>
 
       {/* ID 5 */}
-      <g className='stroke-neutral-500 cursor-pointer hover:fill-neutral-300 duration-300 ease-in-out fill-neutral-500'>
+      <g ref={(e) => ref.current.push(e)} id='mt_mr_5' className={classname_table}>
         <rect
           width="61.766"
           height="63.56"
@@ -167,7 +183,7 @@ function FloorPlan({className}) {
       </g>
 
       {/* MEETING ROOM */}
-      <g className='stroke-neutral-500 cursor-pointer hover:fill-neutral-300 duration-300 ease-in-out fill-neutral-500'>
+      <g ref={(e) => ref.current.push(e)} id='meet_1' className={classname_table}>
         <rect
           width="63.013"
           height="148.653"
@@ -222,7 +238,7 @@ function FloorPlan({className}) {
       </g>
 
       {/* VIP 1 */}
-      <g className='stroke-neutral-500 cursor-pointer hover:fill-neutral-300 duration-300 ease-in-out fill-neutral-500'>
+      <g ref={(e) => ref.current.push(e)} id='vip_1' className={classname_table}>
         <rect
           width="138.922"
           height="63.718"
@@ -266,7 +282,7 @@ function FloorPlan({className}) {
       </g>
 
       {/* VIP 2 */}
-      <g className='stroke-neutral-500 cursor-pointer hover:fill-neutral-300 duration-300 ease-in-out fill-neutral-500'>
+      <g ref={(e) => ref.current.push(e)} id='vip_2' className={classname_table}>
         <rect
           width="143.713"
           height="61.897"
@@ -309,7 +325,7 @@ function FloorPlan({className}) {
       </g>
 
       {/* Out 1 */}
-      <g className='stroke-neutral-500 cursor-pointer hover:fill-neutral-300 duration-300 ease-in-out fill-neutral-500'>
+      <g ref={(e) => ref.current.push(e)} id='mt_od_1' className={classname_table}>
         <path
           d="M360.45 109.931c0 16.911-14.106 30.619-31.506 30.619-17.401 0-31.506-13.708-31.506-30.619 0-16.91 14.105-30.618 31.506-30.618 17.4 0 31.506 13.708 31.506 30.618z"
         ></path>
@@ -332,7 +348,7 @@ function FloorPlan({className}) {
       </g>
       
       {/* Out 2 */}
-      <g className='stroke-neutral-500 cursor-pointer hover:fill-neutral-300 duration-300 ease-in-out fill-neutral-500'>
+      <g ref={(e) => ref.current.push(e)} id='mt_od_2' className={classname_table}>
         <path
           d="M240.45 131.931c0 16.911-14.106 30.619-31.506 30.619-17.401 0-31.506-13.708-31.506-30.619 0-16.91 14.105-30.619 31.506-30.619 17.4 0 31.506 13.709 31.506 30.619z"
         ></path>
@@ -355,35 +371,30 @@ function FloorPlan({className}) {
       </g>
 
        {/* Out 3 */}
-       <g className='stroke-neutral-500 cursor-pointer hover:fill-neutral-300 duration-300 ease-in-out fill-neutral-500'>
+      <g ref={(e) => ref.current.push(e)} id='mt_od_3' className={classname_table}>
         <path
-          fill="#7A7A7A"
           d="M166.45 203.438c0 17.155-14.106 31.062-31.506 31.062-17.401 0-31.506-13.907-31.506-31.062 0-17.156 14.105-31.063 31.506-31.063 17.4 0 31.506 13.907 31.506 31.063z"
         ></path>
         <path
-          stroke="#7A7A7A"
           strokeLinecap="round"
           d="M170.5 190.375L170.5 216.5"
         ></path>
         <path
-          stroke="#7A7A7A"
           strokeLinecap="round"
           d="M99.5 190.375L99.5 216.5"
         ></path>
         <path
-          stroke="#7A7A7A"
           strokeLinecap="round"
           d="M148.2 238.5L121.688 238.5"
         ></path>
         <path
-          stroke="#7A7A7A"
           strokeLinecap="round"
           d="M148.2 168.5L121.688 168.5"
         ></path>
       </g>
       
       {/* Out 4 */}
-      <g className="stroke-neutral-500 cursor-pointer hover:fill-neutral-300 duration-300 ease-in-out fill-neutral-500">
+      <g ref={(e) => ref.current.push(e)} id='mt_od_4' className={classname_table}>
         <path
           d="M144.45 328.931c0 16.911-14.106 30.619-31.506 30.619s-31.507-13.708-31.507-30.619c0-16.91 14.106-30.619 31.507-30.619 17.4 0 31.506 13.709 31.506 30.619z"
         ></path>
@@ -406,7 +417,7 @@ function FloorPlan({className}) {
       </g>
 
       {/* Big Main 5 */}
-      <g className='fill-neutral-500 stroke-neutral-500 cursor-pointer hover:fill-neutral-300 duration-300 ease-in-out'>
+      <g ref={(e) => ref.current.push(e)} id='bt_mr_5' className={classname_table}>
         <rect
           width="104.93"
           height="63.718"
@@ -442,7 +453,7 @@ function FloorPlan({className}) {
       </g>
 
       {/* Big Main 3 */}
-      <g className='fill-neutral-500 stroke-neutral-500 cursor-pointer hover:fill-neutral-300 duration-300 ease-in-out'>
+      <g ref={(e) => ref.current.push(e)} id='bt_mr_3' className={classname_table}>
         <rect
           width="104.93"
           height="63.718"
@@ -478,7 +489,7 @@ function FloorPlan({className}) {
       </g>
 
       {/* Big Main 4 */}
-      <g className='fill-neutral-500 stroke-neutral-500 cursor-pointer hover:fill-neutral-300 duration-300 ease-in-out'>
+      <g ref={(e) => ref.current.push(e)} id='bt_mr_4' className={classname_table}>
         <rect
           width="104.93"
           height="63.718"
@@ -514,7 +525,7 @@ function FloorPlan({className}) {
       </g>
 
       {/* Big Main 2 */}
-      <g className='fill-neutral-500 stroke-neutral-500 cursor-pointer hover:fill-neutral-300 duration-300 ease-in-out'>
+      <g ref={(e) => ref.current.push(e)} id='bt_mr_2' className={classname_table}>
         <rect
           width="104.93"
           height="63.718"
@@ -550,7 +561,7 @@ function FloorPlan({className}) {
       </g>
 
       {/* Big Main 1 */}
-      <g className='fill-neutral-500 stroke-neutral-500 cursor-pointer hover:fill-neutral-300 duration-300 ease-in-out'>
+      <g ref={(e) => ref.current.push(e)} id='bt_mr_1' className={classname_table}>
         <rect
           width="104.93"
           height="63.718"
@@ -586,51 +597,51 @@ function FloorPlan({className}) {
       </g>
 
       {/* small main 9 */}
-      <g className='fill-neutral-500 stroke-neutral-500 cursor-pointer hover:fill-neutral-300 duration-300 ease-in-out'>
+      <g ref={(e) => ref.current.push(e)} id='st_mr_9' className={classname_table}>
         <ellipse cx="572" cy="393" rx="13.333" ry="13"></ellipse>
         <path d="M588 383.467v18.2M556 383.467v18.2"></path>
       </g>
 
       {/* small main 8 */}
-      <g className='fill-neutral-500 stroke-neutral-500 cursor-pointer hover:fill-neutral-300 duration-300 ease-in-out'>
+      <g ref={(e) => ref.current.push(e)} id='st_mr_8' className={classname_table}>
         <ellipse cx="629" cy="393" rx="13.333" ry="13"></ellipse>
         <path d="M645 383.467v18.2M613 383.467v18.2"></path>
       </g>
 
       {/* small main 7 */}
-      <g className='fill-neutral-500 stroke-neutral-500 cursor-pointer hover:fill-neutral-300 duration-300 ease-in-out'>
+      <g ref={(e) => ref.current.push(e)} id='st_mr_7' className={classname_table}>
         <ellipse cx="686.5" cy="393" rx="13.75" ry="13"></ellipse>
         <path d="M703 383.467v18.2M670 383.467v18.2"></path>
       </g>
 
       {/* small main 6 */}
-      <g className='fill-neutral-500 stroke-neutral-500 cursor-pointer hover:fill-neutral-300 duration-300 ease-in-out'>
+      <g ref={(e) => ref.current.push(e)} id='st_mr_6' className={classname_table}>
         <ellipse cx="744" cy="393" rx="13.333" ry="13"></ellipse>
         <path d="M760 383.467v18.2M728 383.467v18.2"></path>
       </g>
 
       {/* small main 5 */}
-      <g className='fill-neutral-500 stroke-neutral-500 cursor-pointer hover:fill-neutral-300 duration-300 ease-in-out'>
+      <g ref={(e) => ref.current.push(e)} id='st_mr_5' className={classname_table}>
         <ellipse cx="801" cy="393" rx="13.333" ry="13"></ellipse>
         <path d="M817 383.467v18.2M785 383.467v18.2"></path>
       </g>
       {/* small main 4 */}
-      <g className='fill-neutral-500 stroke-neutral-500 cursor-pointer hover:fill-neutral-300 duration-300 ease-in-out'>
+      <g ref={(e) => ref.current.push(e)} id='st_mr_4' className={classname_table}>
         <ellipse cx="858" cy="393" rx="13.333" ry="13"></ellipse>
         <path d="M874 383.467v18.2M842 383.467v18.2"></path>
       </g>
       {/* small main 3 */}
-      <g className='fill-neutral-500 stroke-neutral-500 cursor-pointer hover:fill-neutral-300 duration-300 ease-in-out'>
+      <g ref={(e) => ref.current.push(e)} id='st_mr_3' className={classname_table}>
         <ellipse cx="916" cy="393" rx="13.333" ry="13"></ellipse>
         <path d="M932 383.467v18.2M900 383.467v18.2"></path>
       </g>
       {/* small main 2 */}
-      <g className='fill-neutral-500 stroke-neutral-500 cursor-pointer hover:fill-neutral-300 duration-300 ease-in-out'>
+      <g ref={(e) => ref.current.push(e)} id='st_mr_2' className={classname_table}>
         <ellipse cx="973" cy="393" rx="13.333" ry="13"></ellipse>
         <path d="M989 383.467v18.2M957 383.467v18.2"></path>
       </g>
       {/* small main 1 */}
-      <g className='fill-neutral-500 stroke-neutral-500 cursor-pointer hover:fill-neutral-300 duration-300 ease-in-out'>
+      <g ref={(e) => ref.current.push(e)} id='st_mr_1' className={classname_table}>
         <ellipse cx="1030" cy="393" rx="13.333" ry="13"></ellipse>
         <path d="M1046 383.467v18.2M1014 383.467v18.2"></path>
       </g>

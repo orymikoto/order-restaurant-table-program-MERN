@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 
 // table schema
 const table_schema = mongoose.Schema({
+  name: {type: String, unique: true, required: true},
   chairs_amount: {type: Number, required: true},
   room_location: {type: String, required: true},
   table_model: {type: String, required: true},

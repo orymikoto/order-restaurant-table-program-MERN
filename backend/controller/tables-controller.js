@@ -97,3 +97,52 @@ export const soft_delete_table = async (req, res) => {
     return res.status(500).json({message: 'something went wrong.', error: error})
   }
 }
+
+export const update_all = async (req, res) => {
+  try {
+    const name = {'st_mr': 0, 'mt_mr': 0, 'bt_mr': 0, 'mt_od': 0, 'vip': 0, 'meet': 0} 
+
+    const find_name = (room, chairs_amount) => {
+      if(room == 'main_room' && chairs_amount == 2){
+        name['st_mr'] += 1
+        return `st_mr_${name['st_mr']}`
+      }
+      else if(room == 'main_room' && chairs_amount == 4){
+        name['mt_mr'] += 1
+        return `mt_mr_${name['mt_mr']}`
+      }
+      else if(room == 'main_room' && chairs_amount == 6){
+        name['bt_mr'] += 1
+        return `bt_mr_${name['bt_mr']}`
+      }
+      else if(room == 'out_door' && chairs_amount == 4){
+        name['mt_od'] += 1
+        return `mt_od_${name['mt_od']}`
+      }
+      else if(chairs_amount == 8){
+        name['vip'] += 1
+        return `vip_${name['vip']}`
+      }
+      else if(chairs_amount == 11){
+        name['meet'] += 1
+        return `meet_${name['meet']}`
+      }else {
+        return 'unknown'
+      }
+    }
+
+    const tables = await table_schema.find({})
+    tables.forEach(async (i) => {
+      let name = find_name(i.room_location, i.chairs_amount)
+      console.log(name);
+      await table_schema.updateOne({_id: i._id}, {
+        $set: { name: name}
+      })
+    })
+    const new_table = await table_schema.find({})
+    return res.status(200).json({message: 'Update success hope this is right 4 you', data: new_table})
+  } catch (error) {
+    console.error(error);
+    res.json(error)
+  }
+}

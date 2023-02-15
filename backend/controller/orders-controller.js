@@ -13,7 +13,7 @@ import table_schema from '../data/model/tables.js'
 dotenv.config()
 
 // Get all table orders that is going to happens function
-// Admin
+// Admin / Users
 export const get_all_future_table_orders = async (req, res) => {
   try {
     // console.log(moment().tz('Asia/Jakarta').toDate());
@@ -60,18 +60,18 @@ export const get_table_by_date = async (req, res) => {
   }
 }
 
-// Check table orders using table_id on certain time 
+// Check table orders on certain time 
 // Users
-export const check_table_id_order_with_time = async (req, res) => {
+export const check_table_order_with_time = async (req, res) => {
   try {
     const {table_id, start_time, end_time} = req.body
     // console.log(moment(start_time).tz('Asia/Jakarta').toDate());
     const check_table_order = await order_schema.find(
-      { table_id: table_id, $or: [{
+      { $or: [{
         $and: [{"rent_time.start": {$gte: moment(start_time).toDate()}}, {"rent_time.start": {$lte: moment(end_time).toDate()}}],
         $and: [{"rent_time.end": {$gte: moment(start_time).toDate()}}, {"rent_time.start": {$lte: moment(end_time).toDate()}}]
       }]}
-    )
+    ).populate({path: 'table_id'}).select('table_id rent_time')
     if(check_table_order.length < 1){
       return res.status(200).json({message: 'Schedule is available', available: true})
     }
