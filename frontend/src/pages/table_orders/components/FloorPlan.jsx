@@ -1,6 +1,6 @@
 import React, {  useRef } from 'react'
 
-function FloorPlan({className, order_data=[]}) {
+function FloorPlan({className, order_data=[], onclick}) {
   const classname_table = 'fill-neutral-500 stroke-neutral-500 cursor-pointer hover:fill-teal-600 hover:stroke-teal-600 duration-300 ease-in-out'
 
   const ref = useRef([])
@@ -11,10 +11,11 @@ function FloorPlan({className, order_data=[]}) {
     if(order_data.includes(item?.id)){
       return item ? item.className.baseVal = 'fill-red-500 stroke-red-500': null
     }else{
-      return item? item.className.baseVal = classname_table: null
-      
+      return item ? item.className.baseVal = classname_table: null
     }
   })
+
+  console.log(ref.current[0]);
 
 
   return (
@@ -29,7 +30,17 @@ function FloorPlan({className, order_data=[]}) {
       <path fill="#fff" d="M0 0H1200V800H0z"></path>
       
       {/* ID 1 */}
-      <g ref={(e) => ref.current.push(e)} id='mt_mr_1' className={classname_table}>
+      <g onClick={() => {
+        onclick({
+          image:'/assets/table_detail/mr4.jpg', 
+          ac:true, 
+          tv:false, 
+          table_name:'Rectangle Wood Table', 
+          room_name: 'Main_room', 
+          chair_amount:4, 
+          description:'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ab placeat saepe quia autem excepturi, modi explicabo numquam corporis, voluptas, quis sit. Perspiciatis, quae architecto.'})
+        }}  
+        ref={(e) => {ref.current[0] = e}} id='mt_mr_1' className={classname_table}>
         <rect
           width="61.766"
           height="63.56"
@@ -63,7 +74,16 @@ function FloorPlan({className, order_data=[]}) {
       </g>
 
       {/* ID 2 */}
-      <g ref={(e) => ref.current.push(e)} id='mt_mr_2' className={classname_table}>
+      <g onClick={() => {
+        onclick({
+          image:'/assets/table_detail/mr4.jpg', 
+          ac:true, 
+          tv:false, 
+          table_name:'Rectangle Wood Table', 
+          room_name: 'Main_room', 
+          chair_amount:4, 
+          description:'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ab placeat saepe quia autem excepturi, modi explicabo numquam corporis, voluptas, quis sit. Perspiciatis, quae architecto.'})
+        }}  ref={(e) => {ref.current[1] = e}} id='mt_mr_2' className={classname_table}>
         <rect
           width="61.766"
           height="63.56"
@@ -93,7 +113,16 @@ function FloorPlan({className, order_data=[]}) {
       </g>
 
       {/* ID 3 */}
-      <g ref={(e) => ref.current.push(e)} id='mt_mr_3' className={classname_table}>
+      <g onClick={() => {
+        onclick({
+          image:'/assets/table_detail/mr4.jpg', 
+          ac:true, 
+          tv:false, 
+          table_name:'Rectangle Wood Table', 
+          room_name: 'Main_room', 
+          chair_amount:4, 
+          description:'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ab placeat saepe quia autem excepturi, modi explicabo numquam corporis, voluptas, quis sit. Perspiciatis, quae architecto.'})
+        }}  ref={(e) => {ref.current[2] = e}} id='mt_mr_3' className={classname_table}>
         <path
           strokeLinecap="round"
           d="M0.5 -0.5L27.252 -0.5"
@@ -123,7 +152,16 @@ function FloorPlan({className, order_data=[]}) {
       </g>
 
       {/* ID 4 */}
-      <g ref={(e) => ref.current.push(e)} id='mt_mr_4' className={classname_table}>
+      <g onClick={() => {
+        onclick({
+          image:'/assets/table_detail/mr4.jpg', 
+          ac:true, 
+          tv:false, 
+          table_name:'Rectangle Wood Table', 
+          room_name: 'Main_room', 
+          chair_amount:4, 
+          description:'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ab placeat saepe quia autem excepturi, modi explicabo numquam corporis, voluptas, quis sit. Perspiciatis, quae architecto.'})
+        }}  ref={(e) => {ref.current[18] = e}} id='mt_mr_4' className={classname_table}>
         <rect
           width="61.766"
           height="63.56"
@@ -153,7 +191,16 @@ function FloorPlan({className, order_data=[]}) {
       </g>
 
       {/* ID 5 */}
-      <g ref={(e) => ref.current.push(e)} id='mt_mr_5' className={classname_table}>
+      <g onClick={() => {
+        onclick({
+          image:'/assets/table_detail/mr4.jpg', 
+          ac:true, 
+          tv:false, 
+          table_name:'Rectangle Wood Table', 
+          room_name: 'Main_room', 
+          chair_amount:4, 
+          description:'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ab placeat saepe quia autem excepturi, modi explicabo numquam corporis, voluptas, quis sit. Perspiciatis, quae architecto.'})
+        }}  ref={(e) => {ref.current[4] = e}} id='mt_mr_5' className={classname_table}>
         <rect
           width="61.766"
           height="63.56"
@@ -183,7 +230,16 @@ function FloorPlan({className, order_data=[]}) {
       </g>
 
       {/* MEETING ROOM */}
-      <g ref={(e) => ref.current.push(e)} id='meet_1' className={classname_table}>
+      <g onClick={() => {
+        onclick({
+          image:'/assets/table_detail/meet.jpg', 
+          ac:true, 
+          tv:true, 
+          table_name:'Conference Hardwood Table', 
+          room_name: 'Meeting_room', 
+          chair_amount:11, 
+          description:'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ab placeat saepe quia autem excepturi, modi explicabo numquam corporis, voluptas, quis sit. Perspiciatis, quae architecto.'})
+        }}  ref={(e) => {ref.current[5] = e}} id='meet_1' className={classname_table}>
         <rect
           width="63.013"
           height="148.653"
@@ -238,7 +294,16 @@ function FloorPlan({className, order_data=[]}) {
       </g>
 
       {/* VIP 1 */}
-      <g ref={(e) => ref.current.push(e)} id='vip_1' className={classname_table}>
+      <g onClick={() => {
+        onclick({
+          image:'/assets/table_detail/vip.jpg', 
+          ac:true, 
+          tv:false, 
+          table_name:'Rectangle White Marble Table', 
+          room_name: 'VIP_room', 
+          chair_amount:8, 
+          description:'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ab placeat saepe quia autem excepturi, modi explicabo numquam corporis, voluptas, quis sit. Perspiciatis, quae architecto.'})
+        }}  ref={(e) => {ref.current[6] = e}} id='vip_1' className={classname_table}>
         <rect
           width="138.922"
           height="63.718"
@@ -282,7 +347,16 @@ function FloorPlan({className, order_data=[]}) {
       </g>
 
       {/* VIP 2 */}
-      <g ref={(e) => ref.current.push(e)} id='vip_2' className={classname_table}>
+      <g onClick={() => {
+        onclick({
+          image:'/assets/table_detail/vip.jpg', 
+          ac:true, 
+          tv:false, 
+          table_name:'Rectangle White Marble Table', 
+          room_name: 'VIP_room', 
+          chair_amount:8, 
+          description:'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ab placeat saepe quia autem excepturi, modi explicabo numquam corporis, voluptas, quis sit. Perspiciatis, quae architecto.'})
+        }}  ref={(e) => {ref.current[7] = e}} id='vip_2' className={classname_table}>
         <rect
           width="143.713"
           height="61.897"
@@ -325,7 +399,16 @@ function FloorPlan({className, order_data=[]}) {
       </g>
 
       {/* Out 1 */}
-      <g ref={(e) => ref.current.push(e)} id='mt_od_1' className={classname_table}>
+      <g onClick={() => {
+        onclick({
+          image:'/assets/table_detail/od4.jpg', 
+          ac: false, 
+          tv: false, 
+          table_name:'Circle Wood Table', 
+          room_name: 'out_door', 
+          chair_amount:4, 
+          description:'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ab placeat saepe quia autem excepturi, modi explicabo numquam corporis, voluptas, quis sit. Perspiciatis, quae architecto.'})
+        }}  ref={(e) => {ref.current[8] = e}} id='mt_od_1' className={classname_table}>
         <path
           d="M360.45 109.931c0 16.911-14.106 30.619-31.506 30.619-17.401 0-31.506-13.708-31.506-30.619 0-16.91 14.105-30.618 31.506-30.618 17.4 0 31.506 13.708 31.506 30.618z"
         ></path>
@@ -348,7 +431,16 @@ function FloorPlan({className, order_data=[]}) {
       </g>
       
       {/* Out 2 */}
-      <g ref={(e) => ref.current.push(e)} id='mt_od_2' className={classname_table}>
+      <g onClick={() => {
+        onclick({
+          image:'/assets/table_detail/od4.jpg', 
+          ac: false, 
+          tv: false, 
+          table_name:'Circle Wood Table', 
+          room_name: 'out_door', 
+          chair_amount:4, 
+          description:'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ab placeat saepe quia autem excepturi, modi explicabo numquam corporis, voluptas, quis sit. Perspiciatis, quae architecto.'})
+        }} ref={(e) => {ref.current[9] = e}} id='mt_od_2' className={classname_table}>
         <path
           d="M240.45 131.931c0 16.911-14.106 30.619-31.506 30.619-17.401 0-31.506-13.708-31.506-30.619 0-16.91 14.105-30.619 31.506-30.619 17.4 0 31.506 13.709 31.506 30.619z"
         ></path>
@@ -371,7 +463,16 @@ function FloorPlan({className, order_data=[]}) {
       </g>
 
        {/* Out 3 */}
-      <g ref={(e) => ref.current.push(e)} id='mt_od_3' className={classname_table}>
+      <g onClick={() => {
+        onclick({
+          image:'/assets/table_detail/od4.jpg', 
+          ac: false, 
+          tv: false, 
+          table_name:'Circle Wood Table', 
+          room_name: 'out_door', 
+          chair_amount:4, 
+          description:'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ab placeat saepe quia autem excepturi, modi explicabo numquam corporis, voluptas, quis sit. Perspiciatis, quae architecto.'})
+        }} ref={(e) => {ref.current[10] = e}} id='mt_od_3' className={classname_table}>
         <path
           d="M166.45 203.438c0 17.155-14.106 31.062-31.506 31.062-17.401 0-31.506-13.907-31.506-31.062 0-17.156 14.105-31.063 31.506-31.063 17.4 0 31.506 13.907 31.506 31.063z"
         ></path>
@@ -394,7 +495,16 @@ function FloorPlan({className, order_data=[]}) {
       </g>
       
       {/* Out 4 */}
-      <g ref={(e) => ref.current.push(e)} id='mt_od_4' className={classname_table}>
+      <g onClick={() => {
+        onclick({
+          image:'/assets/table_detail/od4.jpg', 
+          ac: false, 
+          tv: false, 
+          table_name:'Circle Wood Table', 
+          room_name: 'out_door', 
+          chair_amount:4, 
+          description:'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ab placeat saepe quia autem excepturi, modi explicabo numquam corporis, voluptas, quis sit. Perspiciatis, quae architecto.'})
+        }} ref={(e) => {ref.current[11] = e}} id='mt_od_4' className={classname_table}>
         <path
           d="M144.45 328.931c0 16.911-14.106 30.619-31.506 30.619s-31.507-13.708-31.507-30.619c0-16.91 14.106-30.619 31.507-30.619 17.4 0 31.506 13.709 31.506 30.619z"
         ></path>
@@ -417,7 +527,16 @@ function FloorPlan({className, order_data=[]}) {
       </g>
 
       {/* Big Main 5 */}
-      <g ref={(e) => ref.current.push(e)} id='bt_mr_5' className={classname_table}>
+      <g onClick={() => {
+        onclick({
+          image:'/assets/table_detail/mr6.jpg', 
+          ac: true, 
+          tv: false, 
+          table_name:'Square Marble Table', 
+          room_name: 'main_room', 
+          chair_amount:6, 
+          description:'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ab placeat saepe quia autem excepturi, modi explicabo numquam corporis, voluptas, quis sit. Perspiciatis, quae architecto.'})
+        }} ref={(e) => {ref.current[12] = e}} id='bt_mr_5' className={classname_table}>
         <rect
           width="104.93"
           height="63.718"
@@ -453,7 +572,16 @@ function FloorPlan({className, order_data=[]}) {
       </g>
 
       {/* Big Main 3 */}
-      <g ref={(e) => ref.current.push(e)} id='bt_mr_3' className={classname_table}>
+      <g onClick={() => {
+        onclick({
+          image:'/assets/table_detail/mr6.jpg', 
+          ac: true, 
+          tv: false, 
+          table_name:'Square Marble Table', 
+          room_name: 'out_door', 
+          chair_amount:6, 
+          description:'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ab placeat saepe quia autem excepturi, modi explicabo numquam corporis, voluptas, quis sit. Perspiciatis, quae architecto.'})
+        }} ref={(e) => {ref.current[13] = e}} id='bt_mr_3' className={classname_table}>
         <rect
           width="104.93"
           height="63.718"
@@ -489,7 +617,16 @@ function FloorPlan({className, order_data=[]}) {
       </g>
 
       {/* Big Main 4 */}
-      <g ref={(e) => ref.current.push(e)} id='bt_mr_4' className={classname_table}>
+      <g onClick={() => {
+        onclick({
+          image:'/assets/table_detail/mr6.jpg', 
+          ac: true, 
+          tv: false, 
+          table_name:'Square Marble Table', 
+          room_name: 'out_door', 
+          chair_amount:6, 
+          description:'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ab placeat saepe quia autem excepturi, modi explicabo numquam corporis, voluptas, quis sit. Perspiciatis, quae architecto.'})
+        }} ref={(e) => {ref.current[14] = e}} id='bt_mr_4' className={classname_table}>
         <rect
           width="104.93"
           height="63.718"
@@ -525,7 +662,16 @@ function FloorPlan({className, order_data=[]}) {
       </g>
 
       {/* Big Main 2 */}
-      <g ref={(e) => ref.current.push(e)} id='bt_mr_2' className={classname_table}>
+      <g onClick={() => {
+        onclick({
+          image:'/assets/table_detail/mr6.jpg', 
+          ac: true, 
+          tv: false, 
+          table_name:'Square Marble Table', 
+          room_name: 'out_door', 
+          chair_amount:6, 
+          description:'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ab placeat saepe quia autem excepturi, modi explicabo numquam corporis, voluptas, quis sit. Perspiciatis, quae architecto.'})
+        }} ref={(e) => {ref.current[15] = e}} id='bt_mr_2' className={classname_table}>
         <rect
           width="104.93"
           height="63.718"
@@ -561,7 +707,16 @@ function FloorPlan({className, order_data=[]}) {
       </g>
 
       {/* Big Main 1 */}
-      <g ref={(e) => ref.current.push(e)} id='bt_mr_1' className={classname_table}>
+      <g onClick={() => {
+        onclick({
+          image:'/assets/table_detail/mr6.jpg', 
+          ac: true, 
+          tv: false, 
+          table_name:'Square Marble Table', 
+          room_name: 'out_door', 
+          chair_amount:6, 
+          description:'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ab placeat saepe quia autem excepturi, modi explicabo numquam corporis, voluptas, quis sit. Perspiciatis, quae architecto.'})
+        }} ref={(e) => {ref.current[16] = e}} id='bt_mr_1' className={classname_table}>
         <rect
           width="104.93"
           height="63.718"
@@ -597,51 +752,132 @@ function FloorPlan({className, order_data=[]}) {
       </g>
 
       {/* small main 9 */}
-      <g ref={(e) => ref.current.push(e)} id='st_mr_9' className={classname_table}>
+      <g onClick={() => {
+        onclick({
+          image:'/assets/table_detail/mr.jpg', 
+          ac: true, 
+          tv: false, 
+          table_name:'Elipse Carbon Table', 
+          room_name: 'main_room', 
+          chair_amount:2, 
+          description:'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ab placeat saepe quia autem excepturi, modi explicabo numquam corporis, voluptas, quis sit. Perspiciatis, quae architecto.'})
+        }} ref={(e) => {ref.current[17] = e}} id='st_mr_9' className={classname_table}>
         <ellipse cx="572" cy="393" rx="13.333" ry="13"></ellipse>
         <path d="M588 383.467v18.2M556 383.467v18.2"></path>
       </g>
 
       {/* small main 8 */}
-      <g ref={(e) => ref.current.push(e)} id='st_mr_8' className={classname_table}>
+      <g onClick={() => {
+        onclick({
+          image:'/assets/table_detail/mr.jpg', 
+          ac: true, 
+          tv: false, 
+          table_name:'Elipse Carbon Table', 
+          room_name: 'main_room', 
+          chair_amount:2, 
+          description:'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ab placeat saepe quia autem excepturi, modi explicabo numquam corporis, voluptas, quis sit. Perspiciatis, quae architecto.'})
+        }} ref={(e) => {ref.current[19] = e}} id='st_mr_8' className={classname_table}>
         <ellipse cx="629" cy="393" rx="13.333" ry="13"></ellipse>
         <path d="M645 383.467v18.2M613 383.467v18.2"></path>
       </g>
 
       {/* small main 7 */}
-      <g ref={(e) => ref.current.push(e)} id='st_mr_7' className={classname_table}>
+      <g onClick={() => {
+        onclick({
+          image:'/assets/table_detail/mr.jpg', 
+          ac: true, 
+          tv: false, 
+          table_name:'Elipse Carbon Table', 
+          room_name: 'main_room', 
+          chair_amount:2, 
+          description:'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ab placeat saepe quia autem excepturi, modi explicabo numquam corporis, voluptas, quis sit. Perspiciatis, quae architecto.'})
+        }} ref={(e) => {ref.current[20] = e}} id='st_mr_7' className={classname_table}>
         <ellipse cx="686.5" cy="393" rx="13.75" ry="13"></ellipse>
         <path d="M703 383.467v18.2M670 383.467v18.2"></path>
       </g>
 
       {/* small main 6 */}
-      <g ref={(e) => ref.current.push(e)} id='st_mr_6' className={classname_table}>
+      <g onClick={() => {
+        onclick({
+          image:'/assets/table_detail/mr.jpg', 
+          ac: true, 
+          tv: false, 
+          table_name:'Elipse Carbon Table', 
+          room_name: 'main_room', 
+          chair_amount:2, 
+          description:'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ab placeat saepe quia autem excepturi, modi explicabo numquam corporis, voluptas, quis sit. Perspiciatis, quae architecto.'})
+        }} ref={(e) => {ref.current[21] = e}} id='st_mr_6' className={classname_table}>
         <ellipse cx="744" cy="393" rx="13.333" ry="13"></ellipse>
         <path d="M760 383.467v18.2M728 383.467v18.2"></path>
       </g>
 
       {/* small main 5 */}
-      <g ref={(e) => ref.current.push(e)} id='st_mr_5' className={classname_table}>
+      <g onClick={() => {
+        onclick({
+          image:'/assets/table_detail/mr.jpg', 
+          ac: true, 
+          tv: false, 
+          table_name:'Elipse Carbon Table', 
+          room_name: 'main_room', 
+          chair_amount:2, 
+          description:'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ab placeat saepe quia autem excepturi, modi explicabo numquam corporis, voluptas, quis sit. Perspiciatis, quae architecto.'})
+        }} ref={(e) => {ref.current[22] = e}} id='st_mr_5' className={classname_table}>
         <ellipse cx="801" cy="393" rx="13.333" ry="13"></ellipse>
         <path d="M817 383.467v18.2M785 383.467v18.2"></path>
       </g>
       {/* small main 4 */}
-      <g ref={(e) => ref.current.push(e)} id='st_mr_4' className={classname_table}>
+      <g onClick={() => {
+        onclick({
+          image:'/assets/table_detail/mr.jpg', 
+          ac: true, 
+          tv: false, 
+          table_name:'Elipse Carbon Table', 
+          room_name: 'main_room', 
+          chair_amount:2, 
+          description:'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ab placeat saepe quia autem excepturi, modi explicabo numquam corporis, voluptas, quis sit. Perspiciatis, quae architecto.'})
+        }} ref={(e) => {ref.current[23] = e}} id='st_mr_4' className={classname_table}>
         <ellipse cx="858" cy="393" rx="13.333" ry="13"></ellipse>
         <path d="M874 383.467v18.2M842 383.467v18.2"></path>
       </g>
       {/* small main 3 */}
-      <g ref={(e) => ref.current.push(e)} id='st_mr_3' className={classname_table}>
+      <g onClick={() => {
+        onclick({
+          image:'/assets/table_detail/mr.jpg', 
+          ac: true, 
+          tv: false, 
+          table_name:'Elipse Carbon Table', 
+          room_name: 'main_room', 
+          chair_amount:2, 
+          description:'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ab placeat saepe quia autem excepturi, modi explicabo numquam corporis, voluptas, quis sit. Perspiciatis, quae architecto.'})
+        }} ref={(e) => {ref.current[24] = e}} id='st_mr_3' className={classname_table}>
         <ellipse cx="916" cy="393" rx="13.333" ry="13"></ellipse>
         <path d="M932 383.467v18.2M900 383.467v18.2"></path>
       </g>
       {/* small main 2 */}
-      <g ref={(e) => ref.current.push(e)} id='st_mr_2' className={classname_table}>
+      <g onClick={() => {
+        onclick({
+          image:'/assets/table_detail/mr.jpg', 
+          ac: true, 
+          tv: false, 
+          table_name:'Elipse Carbon Table', 
+          room_name: 'main_room', 
+          chair_amount:2, 
+          description:'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ab placeat saepe quia autem excepturi, modi explicabo numquam corporis, voluptas, quis sit. Perspiciatis, quae architecto.'})
+        }} ref={(e) => {ref.current[25] = e}} id='st_mr_2' className={classname_table}>
         <ellipse cx="973" cy="393" rx="13.333" ry="13"></ellipse>
         <path d="M989 383.467v18.2M957 383.467v18.2"></path>
       </g>
       {/* small main 1 */}
-      <g ref={(e) => ref.current.push(e)} id='st_mr_1' className={classname_table}>
+      <g onClick={() => {
+        onclick({
+          image:'/assets/table_detail/mr.jpg', 
+          ac: true, 
+          tv: false, 
+          table_name:'Elipse Carbon Table', 
+          room_name: 'main_room', 
+          chair_amount:2, 
+          description:'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ab placeat saepe quia autem excepturi, modi explicabo numquam corporis, voluptas, quis sit. Perspiciatis, quae architecto.'})
+        }} ref={(e) => {ref.current[26] = e}} id='st_mr_1' className={classname_table}>
         <ellipse cx="1030" cy="393" rx="13.333" ry="13"></ellipse>
         <path d="M1046 383.467v18.2M1014 383.467v18.2"></path>
       </g>
