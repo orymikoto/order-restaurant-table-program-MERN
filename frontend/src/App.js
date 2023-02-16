@@ -1,6 +1,7 @@
 // NPM package
 import React from 'react';
 import { Route, Routes } from 'react-router-dom'
+import About from './pages/About';
 
 // Import local pages
 import Home from './pages/Home';
@@ -20,6 +21,7 @@ function App() {
       <Route path='/user/change-password' element={<ChangePassword />}/>
       <Route path='/menu' element={<Menu />} />
       <Route path='/table' element={<Tables />} />
+      <Route path='/About' element={<About />} />
     </Routes>
    </div>
   );

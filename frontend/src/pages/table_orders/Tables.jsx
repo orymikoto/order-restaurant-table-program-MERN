@@ -130,7 +130,7 @@ function Tables() {
 
   return (
     <div className='bg-neutral-100'>
-      <Navbar />
+      <Navbar auth={cookies.auth_token === undefined ?true:false}/>
       <div className='flex justify-center my-7 mx-auto'>
         <h2 className='text-5xl text-amber-500 font-unbounded'>ORDER TABLE</h2>
       </div>

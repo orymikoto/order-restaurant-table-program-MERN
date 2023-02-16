@@ -29,9 +29,11 @@ function Footer() {
       </div>
 
       <div /* About, Contact, Connect */ className='flex-col my-4 w-[60%] mb-[7rem]'>
-        <div /* Return to top */ className="flex cursor-default group font-medium text-neutral-700 justify-end border-b border-gray-400">
-          <h4 className='group-hover:text-teal-600 ease-in-out duration-200'>Return To Top</h4>
-          <TiArrowSortedUp className='w-7 h-7 group-hover:text-teal-600 ease-in-out duration-200' />
+        <div /* Return to top */  className="flex font-medium text-neutral-700 justify-end border-b border-gray-400">
+          <div onClick={() => window.scrollTo({top: 0, left: 0, behavior: 'smooth'})} className='group cursor-pointer flex'>
+            <h4  className='group-hover:text-teal-600 ease-in-out duration-200' >Return To Top</h4>
+            <TiArrowSortedUp onClick={() => window.scrollTo({top: 0, left: 0, behavior: 'smooth'})} className='w-7 h-7 group-hover:text-teal-600 ease-in-out duration-200' />
+          </div>
         </div>
         <div /* Information */ className="flex w-[80%] justify-between">
           <div /* About */ className="flex-col text-neutral-800">

@@ -8,14 +8,16 @@ function Navbar({auth}) {
       
       <div className=' flex-1 flex ml-20 items-center' /* Restaurant Name */> 
         <h2 className=' cursor-default font-semibold text-2xl text-neutral-100 '>
-          MIKOTO MERN
+          <Link to={'/'}>
+            MIKOTO MERN
+          </Link>
         </h2> 
       </div>
 
       <div className='flex mr-7 gap-x-7' /* Navigation */>
         <Link to={'/table'} className='p-2 text-lg cursor-pointer font-medium text-neutral-400 hover:text-neutral-100'>Tables</Link>
         <Link to={'/menu'} className='p-2 text-lg cursor-pointer font-medium text-neutral-400 hover:text-neutral-100'>Menu</Link>
-        <Link to={'/'} className='p-2 text-lg cursor-pointer font-medium text-neutral-400 hover:text-neutral-100'>About</Link>
+        <Link to={'/about'} className='p-2 text-lg cursor-pointer font-medium text-neutral-400 hover:text-neutral-100'>About</Link>
       </div>
       {
         auth?

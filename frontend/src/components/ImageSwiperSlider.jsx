@@ -11,7 +11,7 @@ import 'swiper/css/autoplay'
 
 function ImageSwiperSlider({images, className}) {
   return (
-        <Swiper autoplay={{delay:3000}} className={className} modules={[Navigation, Autoplay, A11y]} loop={true} navigation >
+        <Swiper autoplay={{delay:3000, disableOnInteraction: false}} className={className} modules={[Navigation, Autoplay, A11y]} loop={true} navigation >
           {
             images.map((i) => 
               <SwiperSlide className='text-center'>
