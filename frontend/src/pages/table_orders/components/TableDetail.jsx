@@ -1,6 +1,6 @@
 import React from 'react'
 
-function TableDetail({table_name, chair_amount, description, image, room_name, ac, tv}) {
+function TableDetail({table_name, chair_amount, description, image, room_name, ac, tv, setorder}) {
   return (
     <div className='rounded-2xl flex flex-col m-2 bg-white shadow-[7px_7px_21px_10px_rgba(0,0,0,0.21)]'>
         <div className='rounded-lg overflow-hidden h-[25rem] m-7 mb-2'>
@@ -25,7 +25,7 @@ function TableDetail({table_name, chair_amount, description, image, room_name, a
             <p className='w-[10rem] text-left'>&#x2022; Presentation tv </p> <p>: {`${tv}`}</p>
           </div>
         </div>
-        <div onClick={() => console.log('yeay!')} className='self-center px-2 p-1 my-4 cursor-pointer rounded-lg border-2 border-teal-600 hover:border-white text-teal-600 hover:text-white hover:bg-teal-600 duration-300 ease-in-out'>
+        <div onClick={() => setorder(true)} className='self-center px-2 p-1 my-4 cursor-pointer rounded-lg border-2 border-teal-600 hover:border-white text-teal-600 hover:text-white hover:bg-teal-600 duration-300 ease-in-out'>
           Order This Table
         </div>
       </div>

@@ -17,8 +17,8 @@ function FloorPlan({className, order_data=[], onclick, call_state, active}) {
     }
   })
 
-  const selected = (e) => {
-    call_state(e)
+  const selected = (e, id, chair, room) => {
+    call_state(e, id, chair, room)
   }
 
 
@@ -38,7 +38,7 @@ function FloorPlan({className, order_data=[], onclick, call_state, active}) {
       
       {/* ID 1 */}
       <g onClick={() => {
-        selected(0)
+        selected(0, 'mt_mr_1', '4', 'Main Room')
         onclick({
           image:'/assets/table_detail/mr4.jpg', 
           ac:true, 
@@ -83,7 +83,7 @@ function FloorPlan({className, order_data=[], onclick, call_state, active}) {
 
       {/* ID 2 */}
       <g onClick={() => {
-        selected(1)
+        selected(1, 'mt_mr_2', '4', 'Main Room')
         onclick({
           image:'/assets/table_detail/mr4.jpg', 
           ac:true, 
@@ -123,7 +123,7 @@ function FloorPlan({className, order_data=[], onclick, call_state, active}) {
 
       {/* ID 3 */}
       <g onClick={() => {
-        selected(2)
+        selected(2, 'mt_mr_3', '4', 'Main Room')
         onclick({
           image:'/assets/table_detail/mr4.jpg', 
           ac:true, 
@@ -163,7 +163,7 @@ function FloorPlan({className, order_data=[], onclick, call_state, active}) {
 
       {/* ID 4 */}
       <g onClick={() => {
-        selected(3)
+        selected(3, 'mt_mr_4', '4', 'Main Room')
         onclick({
           image:'/assets/table_detail/mr4.jpg', 
           ac:true, 
@@ -203,7 +203,7 @@ function FloorPlan({className, order_data=[], onclick, call_state, active}) {
 
       {/* ID 5 */}
       <g onClick={() => {
-        selected(4)
+        selected(4, 'mt_mr_5', '4', 'Main Room')
         onclick({
           image:'/assets/table_detail/mr4.jpg', 
           ac:true, 
@@ -243,14 +243,14 @@ function FloorPlan({className, order_data=[], onclick, call_state, active}) {
 
       {/* MEETING ROOM */}
       <g onClick={() => {
-        selected(5)
+        selected(5, 'meet_1', '14', 'Meeting Room')
         onclick({
           image:'/assets/table_detail/meet.jpg', 
           ac:true, 
           tv:true, 
           table_name:'Conference Hardwood Table', 
           room_name: 'Meeting_room', 
-          chair_amount:11, 
+          chair_amount:14, 
           description:'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ab placeat saepe quia autem excepturi, modi explicabo numquam corporis, voluptas, quis sit. Perspiciatis, quae architecto.'})
         }}  ref={(e) => {ref.current[5] = e}} id='meet_1' className={classname_table}>
         <rect
@@ -308,7 +308,7 @@ function FloorPlan({className, order_data=[], onclick, call_state, active}) {
 
       {/* VIP 1 */}
       <g onClick={() => {
-        selected(6)
+        selected(6, 'vip_1', 8, 'VIP Room')
         onclick({
           image:'/assets/table_detail/vip.jpg', 
           ac:true, 
@@ -362,7 +362,7 @@ function FloorPlan({className, order_data=[], onclick, call_state, active}) {
 
       {/* VIP 2 */}
       <g onClick={() => {
-        selected(7)
+        selected(7, 'vip_2', 8, 'VIP Room')
         onclick({
           image:'/assets/table_detail/vip.jpg', 
           ac:true, 
@@ -415,7 +415,7 @@ function FloorPlan({className, order_data=[], onclick, call_state, active}) {
 
       {/* Out 1 */}
       <g onClick={() => {
-        selected(8)
+        selected(8, 'mt_od_1', 4, 'Out Door')
         onclick({
           image:'/assets/table_detail/od4.jpg', 
           ac: false, 
@@ -448,7 +448,7 @@ function FloorPlan({className, order_data=[], onclick, call_state, active}) {
       
       {/* Out 2 */}
       <g onClick={() => {
-        selected(9)
+        selected(9, 'mt_od_2', 4, 'Out Door')
         onclick({
           image:'/assets/table_detail/od4.jpg', 
           ac: false, 
@@ -481,7 +481,7 @@ function FloorPlan({className, order_data=[], onclick, call_state, active}) {
 
        {/* Out 3 */}
       <g onClick={() => {
-        selected(10)
+        selected(10, 'mt_od_3', 4, 'Out Door')
         onclick({
           image:'/assets/table_detail/od4.jpg', 
           ac: false, 
@@ -514,7 +514,7 @@ function FloorPlan({className, order_data=[], onclick, call_state, active}) {
       
       {/* Out 4 */}
       <g onClick={() => {
-        selected(11)
+        selected(11, 'mt_od_4', 4, 'Out Door')
         onclick({
           image:'/assets/table_detail/od4.jpg', 
           ac: false, 
@@ -547,7 +547,7 @@ function FloorPlan({className, order_data=[], onclick, call_state, active}) {
 
       {/* Big Main 5 */}
       <g onClick={() => {
-        selected(12)
+        selected(12, 'bt_mr_5', 6, 'Main Room')
         onclick({
           image:'/assets/table_detail/mr6.jpg', 
           ac: true, 
@@ -593,7 +593,7 @@ function FloorPlan({className, order_data=[], onclick, call_state, active}) {
 
       {/* Big Main 3 */}
       <g onClick={() => {
-        selected(13)
+        selected(13, 'bt_mr_3', 6, 'Main Room')
         onclick({
           image:'/assets/table_detail/mr6.jpg', 
           ac: true, 
@@ -639,7 +639,7 @@ function FloorPlan({className, order_data=[], onclick, call_state, active}) {
 
       {/* Big Main 4 */}
       <g onClick={() => {
-        selected(14)
+        selected(14, 'bt_mr_4', 6, 'Main Room')
         onclick({
           image:'/assets/table_detail/mr6.jpg', 
           ac: true, 
@@ -685,7 +685,7 @@ function FloorPlan({className, order_data=[], onclick, call_state, active}) {
 
       {/* Big Main 2 */}
       <g onClick={() => {
-        selected(15)
+        selected(15, 'bt_mr_2', 6, 'Main Room')
         onclick({
           image:'/assets/table_detail/mr6.jpg', 
           ac: true, 
@@ -731,7 +731,7 @@ function FloorPlan({className, order_data=[], onclick, call_state, active}) {
 
       {/* Big Main 1 */}
       <g onClick={() => {
-        selected(16)
+        selected(16, 'bt_mr_1', 6, 'Main Room')
         onclick({
           image:'/assets/table_detail/mr6.jpg', 
           ac: true, 
@@ -777,7 +777,7 @@ function FloorPlan({className, order_data=[], onclick, call_state, active}) {
 
       {/* small main 9 */}
       <g onClick={() => {
-        selected(17)
+        selected(17, 'st_mr_9', 2, 'Main Room')
         onclick({
           image:'/assets/table_detail/mr.jpg', 
           ac: true, 
@@ -793,7 +793,7 @@ function FloorPlan({className, order_data=[], onclick, call_state, active}) {
 
       {/* small main 8 */}
       <g onClick={() => {
-        selected(18)
+        selected(18, 'st_mr_8', 2, 'Main Room')
         onclick({
           image:'/assets/table_detail/mr.jpg', 
           ac: true, 
@@ -809,7 +809,7 @@ function FloorPlan({className, order_data=[], onclick, call_state, active}) {
 
       {/* small main 7 */}
       <g onClick={() => {
-        selected(19)
+        selected(19, 'st_mr_7', 2, 'Main Room')
         onclick({
           image:'/assets/table_detail/mr.jpg', 
           ac: true, 
@@ -825,7 +825,7 @@ function FloorPlan({className, order_data=[], onclick, call_state, active}) {
 
       {/* small main 6 */}
       <g onClick={() => {
-        selected(20)
+        selected(20, 'st_mr_6', 2, 'Main Room')
         onclick({
           image:'/assets/table_detail/mr.jpg', 
           ac: true, 
@@ -841,7 +841,7 @@ function FloorPlan({className, order_data=[], onclick, call_state, active}) {
 
       {/* small main 5 */}
       <g onClick={() => {
-        selected(21)
+        selected(21, 'st_mr_5', 2, 'Main Room')
         onclick({
           image:'/assets/table_detail/mr.jpg', 
           ac: true, 
@@ -856,7 +856,7 @@ function FloorPlan({className, order_data=[], onclick, call_state, active}) {
       </g>
       {/* small main 4 */}
       <g onClick={() => {
-        selected(22)
+        selected(22, 'st_mr_4', 2, 'Main Room')
         onclick({
           image:'/assets/table_detail/mr.jpg', 
           ac: true, 
@@ -871,7 +871,7 @@ function FloorPlan({className, order_data=[], onclick, call_state, active}) {
       </g>
       {/* small main 3 */}
       <g onClick={() => {
-        selected(23)
+        selected(23, 'st_mr_3', 2, 'Main Room')
         onclick({
           image:'/assets/table_detail/mr.jpg', 
           ac: true, 
@@ -886,7 +886,7 @@ function FloorPlan({className, order_data=[], onclick, call_state, active}) {
       </g>
       {/* small main 2 */}
       <g onClick={() => {
-        selected(24)
+        selected(24, 'st_mr_2', 2, 'Main Room')
         onclick({
           image:'/assets/table_detail/mr.jpg', 
           ac: true, 
@@ -901,7 +901,7 @@ function FloorPlan({className, order_data=[], onclick, call_state, active}) {
       </g>
       {/* small main 1 */}
       <g onClick={() => {
-        selected(25)
+        selected(25, 'st_mr_1', 2, 'Main Room')
         onclick({
           image:'/assets/table_detail/mr.jpg', 
           ac: true, 

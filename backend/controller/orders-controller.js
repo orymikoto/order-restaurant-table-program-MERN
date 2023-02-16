@@ -105,9 +105,21 @@ export const check_table_id_order = async (req, res) => {
 // Users
 export const create_users_table_order = async (req, res) => {
   try {
-    const {table_id, start_time, end_time, customer_phone_number, customer_name} = req.body 
+    const {name, start_time, end_time, customer_phone_number, customer_name} = req.body 
+    const find_table = await table_schema.find({name: name})
+    if (find_table.length < 1){
+      return res.status(404).json({message: 'Table name not found'})
+    }
+    const check_table = await order_schema.find({table_id: find_table[0]._id, $or: [{
+      $and: [{"rent_time.start": {$gte: moment(start_time).toDate()}}, {"rent_time.start": {$lte: moment(end_time).toDate()}}],
+      $and: [{"rent_time.end": {$gte: moment(start_time).toDate()}}, {"rent_time.start": {$lte: moment(end_time).toDate()}}]
+    }]})
+    if(check_table.length >= 1){
+      return res.status(400).json({message: 'Table Schedule is full please check first before ordering'})
+    }
+    console.log(find_table[0]._id);
     const new_table_order = await order_schema.create({
-      table_id: table_id,
+      table_id: find_table[0]._id,
       rent_time: {
         start: moment(start_time).tz('Asia/Jakarta').toDate(),
         end: moment(end_time).tz('Asia/Jakarta').toDate()

@@ -19,15 +19,26 @@ import NothingSelected from './components/NothingSelected'
 import TableDetail from './components/TableDetail'
 import Navbar from '../../components/Navbar'
 import Footer from '../../components/Footer'
+import OrderingTableModal from './components/OrderingTableModal'
 
 function Tables() {
   const [Start, setStart] = useState('10:00')
   const [End, setEnd] = useState('21:00')
   const [Date, setDate] = useState(moment().add(1, 'day').format('YYYY-MM-DD'))
   const [cookies] = useCookies()
-  const [select , setselect] = useState(null)
+  const [select , setselect] = useState({
+    active: null,
+    number: null,
+    chair: null,
+    location: null
+  })
+  const [Customerdata, setCustomerdata] = useState({
+    name: '',
+    number: ''
+  })
   const [ , setOrdertable] = useState([{}])
   const [Check, setCheck] = useState(false)
+  const [Ordering, setOrdering] = useState(false)
   const [Usetable, setUsetable] = useState([])
   const [Showmessage, setShowmessage] = useState({
     show: false,
@@ -60,8 +71,40 @@ function Tables() {
     })
   }
 
-  const call_state = (e) => {
-    setselect(e)
+  const handleChange = (e) => {
+    setCustomerdata((prevState) => {
+      return {...prevState, ...{ [e.target.name] : e.target.value}}
+    })
+  }
+
+  const orderTablePost = () => {
+    const data_order = {
+      name: select.number,
+      start_time: `${Date}T${Start}`,
+      end_time: `${Date}T${End}`,
+      customer_phone_number: Customerdata.number,
+      customer_name: Customerdata.name
+    }
+    axios.post(process.env.REACT_APP_SERVER_URL + '/order-table/create-user', data_order, { headers : {"Authorization": `Bearer ${cookies.auth_token}`}}).then((res) => {
+      console.log(res);
+      setCustomerdata({
+        name: '',
+        number: ''
+      })
+      messageHandler(true, 'Order Success', res.data.message)
+    }).catch((err) => {
+      messageHandler(true, 'Order Failed', err.response.data.message)
+      console.error(err);
+    })
+  }
+
+  const call_state = (e, id, chair, location) => {
+    setselect({
+      active: e,
+      number: id,
+      chair: chair,
+      location: location
+    })
     console.log(select);
   }
 
@@ -114,7 +157,7 @@ function Tables() {
               <BsCheck2All className={`text-teal-600 w-7 h-7 ${Check? '': 'hidden'}`} />
             </div>
           </div>
-          <FloorPlan active={select} call_state={call_state} onclick={onClickTables} order_data={Usetable} className=' w-[50rem] h-[35rem]'/>
+          <FloorPlan active={select.active} call_state={call_state} onclick={onClickTables} order_data={Usetable} className=' w-[50rem] h-[35rem]'/>
           <div className='flex gap-x-7 mx-4 items-center text-neutral-600 text-sm font-medium font-poppins'>
             <div className='flex items-center gap-x-2'>
               <div className='w-7 h-3 bg-neutral-500' />
@@ -139,16 +182,21 @@ function Tables() {
           </div>
         </div>
         <div>
-          <IoMdArrowDroprightCircle onClick={() => setExpander(null)} className='cursor-pointer duration-200 ease-in-out hover:text-teal-400 w-[2.1rem] h-[2.1rem] text-teal-600' />
+          <IoMdArrowDroprightCircle onClick={() => {setExpander(null); setselect(null)} } className='cursor-pointer duration-200 ease-in-out hover:text-teal-400 w-[2.1rem] h-[2.1rem] text-teal-600' />
         </div>
         {
           Expander == null?
           <NothingSelected image='/assets/restaurant1.jpg' ac={true} tv={false} table_name='Rectangle Wood Table' room_name='main_room' chair_amount={4} description={'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ab placeat saepe quia autem excepturi, modi explicabo numquam corporis, voluptas, quis sit. Perspiciatis, quae architecto.'} />
-          :<TableDetail image={Expander.image} ac={Expander.ac} table_name={Expander.table_name} tv={Expander.tv} room_name={Expander.room_name} chair_amount={Expander.chair_amount} description={Expander.description} />
+          :<TableDetail setorder={setOrdering} image={Expander.image} ac={Expander.ac} table_name={Expander.table_name} tv={Expander.tv} room_name={Expander.room_name} chair_amount={Expander.chair_amount} description={Expander.description} />
         }
         {
           Showmessage.show?
           <PopupMessage handleChange={messageHandler} message={Showmessage.message} title={Showmessage.title} />
+          :null
+        }
+        {
+          Ordering?
+            <OrderingTableModal customer_data={Customerdata} confirm={orderTablePost} onChange={handleChange}  date={Date} start={Start} end={End} back={setOrdering} number={select.number} chair={select.chair} location={select.location} />
           :null
         }
       </div>
